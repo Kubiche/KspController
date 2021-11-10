@@ -22,18 +22,48 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  for (int i = 5; i > -1; i = i - 1){
-    while (digit[i]){
-      byte current = digit[i];      
-      digit[i] = current << 1;
-      lc.setRow(0,i,digit[i]);
-      delay(1000);
-    }
-  }
-  for (int i = 0; i < 5; i++){
-    digit[i] = 0B11111111;
-    lc.setRow(0,i,digit[i]);    
+  // reduce the level in each bar by one every 1 second. Only 1 bar implemented now.
+  if (digit[0]) {
+    digit[1] = digit[1] & 0B10111111;
+    lc.setRow(0,1,digit[1]);
+    delay(1000);
+    digit[1] = digit[1] & 0B00111111;
+    lc.setRow(0,1,digit[1]);
+    delay(1000);
+    digit[0] = digit[0] & 0B11111110;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
+    digit[0] = digit[0] & 0B11111100;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
+    digit[0] = digit[0] & 0B11111000;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
+    digit[0] = digit[0] & 0B11110000;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
+    digit[0] = digit[0] & 0B11100000;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
+    digit[0] = digit[0] & 0B11000000;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
+    digit[0] = digit[0] & 0B10000000;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
+    digit[0] = digit[0] & 0B00000000;
+    lc.setRow(0,0,digit[0]);
+    delay(1000);
   } 
+
+  delay(1000);
+
+  if (digit[0] == false){
+    digit[0] = 0B11111111;
+    digit[1] = digit[1] | 0B11000000;
+    lc.setRow(0,0,digit[0]);
+    lc.setRow(0,1,digit[1]);    
+  }
+
   delay(2000);
 }
