@@ -26,6 +26,7 @@ void loop() {
   if (digit[0]) {
     digit[1] = digit[1] & 0B10111111;
     lc.setRow(0,1,digit[1]);
+    digit[3] = digit[3] & 0B11101111;
     delay(1000);
     digit[1] = digit[1] & 0B00111111;
     lc.setRow(0,1,digit[1]);
