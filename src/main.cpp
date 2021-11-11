@@ -21,104 +21,87 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         resourceMessage mySStageFuel;
         // Convert the message we received to an Resource struct.
         mySStageFuel = parseResource(msg);
-        sfCurrVal = map(mySStageFuel.available, 0, mySStageFuel.total, 0, 50);
-        switch (sfCurrVal){
+        switch (map(mySStageFuel.available, 0, mySStageFuel.total, 0, 50)){
           case 0:
             digit[0] = 0B00000000;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
-            lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;            
+            digit[1] = digit[1] | 0b00000000;
+            lc.setRow(0,1,digit[1]);                        
             break;
           case 5:
             digit[0] = 0B10000000;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;        
           case 10:
             digit[0] = 0b11000000;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;
           case 15: 
             digit[0] = 0b11100000;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;
           case 20: 
             digit[0] = 0b11110000;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;
           case 25: 
             digit[0] = 0b11111000;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;
           case 30: 
             digit[0] = 0b11111100;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;
           case 35: 
             digit[0] = 0b11111110;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;
           case 40: 
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
             digit[1] = digit[1] & 0b00111111;
+            digit[1] = digit[1] | 0b00000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;    
             break;
           case 45:
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
             digit[1] = digit[1] | 0b10000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal;
             break;
           case 50:
             digit[0] = 0b11111111;
-            lc.setRow(0,0,digit[0]); 
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
             digit[1] = digit[1] | 0b11000000;
             lc.setRow(0,1,digit[1]);
-            sfLastVal = sfCurrVal; 
             break;  
         }      
       }
-      break; 
-    case LF_STAGE_MESSAGE:
-      if (msgSize == sizeof(resourceMessage)){
-        // Create a new fuel struct
-        resourceMessage myLStageFuel;
-        // Convert the message we received to an Resource struct.
-        myLStageFuel = parseResource(msg);
-        lfCurrVal = map(myLStageFuel.available, 0, myLStageFuel.total, 0, 50);
-        switch (lfCurrVal){
-          case 0:
-            digit[1] = 
             
-        }
-      }
-      break;
-
-       
   }
 
 }
