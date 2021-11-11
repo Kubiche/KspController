@@ -2,69 +2,162 @@
 #include <LedControl.h>
 #include <KerbalSimpit.h>
 
-byte digit[5] = {0B11111111,0B11111111,0B11111111,0B11111111,0B11111111};
 
+int sfCurrVal;
+int sfLastVal = 0;
+int lfCurrVal;
+int lfLastVal = 0;
+int monoCurrVal;
+int monoLastVal = 0;
+int elecCurrVal;
+int elecLastVaL = 0; 
 
+KerbalSimpit mySimpit(Serial);
+
+byte digit[8]; //array to store the max7219 digit values.
 
 LedControl lc=LedControl(12,11,10,1);
 
+void messageHandler(byte messageType, byte msg[], byte msgSize) {
+  switch(messageType) {
+    case SF_STAGE_MESSAGE:
+      // Checking if the message is the size we expect is a very basic
+      // way to confirm if the message was received properly.
+      if (msgSize == sizeof(resourceMessage)){
+        // Create a new fuel struct
+        resourceMessage mySStageFuel;
+        // Convert the message we received to an Resource struct.
+        mySStageFuel = parseResource(msg);
+        sfCurrVal = map(mySStageFuel.available, 0, mySStageFuel.total, 0, 50);
+        switch (sfCurrVal){
+          case 0:
+            digit[0] = 0B00000000;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;            
+            break;
+          case 5:
+            digit[0] = 0B10000000;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;        
+          case 10:
+            digit[0] = 0b11000000;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;
+          case 15: 
+            digit[0] = 0b11100000;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;
+          case 20: 
+            digit[0] = 0b11110000;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;
+          case 25: 
+            digit[0] = 0b11111000;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;
+          case 30: 
+            digit[0] = 0b11111100;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;
+          case 35: 
+            digit[0] = 0b11111110;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;
+          case 40: 
+            digit[0] = 0b11111111;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] & 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;    
+            break;
+          case 45:
+            digit[0] = 0b11111111;
+            lc.setRow(0,0,digit[0]);
+            digit[1] = digit[1] | 0b10000000;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal;
+            break;
+          case 50:
+            digit[0] = 0b11111111;
+            lc.setRow(0,0,digit[0]); 
+            digit[1] = digit[1] | 0b11000000;
+            lc.setRow(0,1,digit[1]);
+            sfLastVal = sfCurrVal; 
+            break;  
+        }      
+      }
+      break; 
+    case LF_STAGE_MESSAGE:
+      if (msgSize == sizeof(resourceMessage)){
+        // Create a new fuel struct
+        resourceMessage myLStageFuel;
+        // Convert the message we received to an Resource struct.
+        myLStageFuel = parseResource(msg);
+        lfCurrVal = map(myLStageFuel.available, 0, myLStageFuel.total, 0, 50);
+        switch (lfCurrVal){
+          case 0:
+            digit[1] = 
+            
+        }
+      }
+      break;
+
+       
+  }
+
+}
+
 void setup() {
- 
-  // put your setup code here, to run once:
-  lc.shutdown(0,false);
-  /* Set the brightness to a medium values */
-  delay(2000);
-  for (int i = 0; i < 5; i++){
-    lc.setRow(0,i,digit[i]);    
-  } 
-  delay(2000);
+
+  Serial.begin(115200); // Initialize Serial connection to mod
+  while (!mySimpit.init()); 
   
+  lc.shutdown(0,false); // Turn on the led controller  
+  lc.clearDisplay(0);
+
+  mySimpit.inboundHandler(messageHandler); // callback function
+  
+  // Register to fuel messages  
+  mySimpit.registerChannel(SF_STAGE_MESSAGE);
+  mySimpit.registerChannel(LF_STAGE_MESSAGE);
+  mySimpit.registerChannel(MONO_MESSAGE);
+  mySimpit.registerChannel(ELECTRIC_MESSAGE);
 }
 
 void loop() {
-  // reduce the level in each bar by one every 1 second. Only 1 bar implemented now.
-  if (digit[0]) {
-    digit[1] = digit[1] & 0B10111111;
-    lc.setRow(0,1,digit[1]);
-    digit[3] = digit[3] & 0B11101111;
-    delay(1000);
-    digit[1] = digit[1] & 0B00111111;
-    lc.setRow(0,1,digit[1]);
-    delay(1000);
-    digit[0] = digit[0] & 0B11111110;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-    digit[0] = digit[0] & 0B11111100;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-    digit[0] = digit[0] & 0B11111000;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-    digit[0] = digit[0] & 0B11110000;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-    digit[0] = digit[0] & 0B11100000;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-    digit[0] = digit[0] & 0B11000000;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-    digit[0] = digit[0] & 0B10000000;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-    digit[0] = digit[0] & 0B00000000;
-    lc.setRow(0,0,digit[0]);
-    delay(1000);
-  } 
 
-  delay(1000);
+  mySimpit.update(); // Update with the mod
+  delay(500);
 
-  if (digit[0] == false){
-    digit[0] = 0B11111111;
-    digit[1] = digit[1] | 0B11000000;
-    lc.setRow(0,0,digit[0]);
-    lc.setRow(0,1,digit[1]);    
-  }
+  
 
-  delay(2000);
+
+
+
+  
+
+ 
 }
