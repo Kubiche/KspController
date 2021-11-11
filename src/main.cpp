@@ -3,14 +3,7 @@
 #include <KerbalSimpit.h>
 
 
-int sfCurrVal;
-int sfLastVal = 0;
-int lfCurrVal;
-int lfLastVal = 0;
-int monoCurrVal;
-int monoLastVal = 0;
-int elecCurrVal;
-int elecLastVaL = 0; 
+ 
 
 KerbalSimpit mySimpit(Serial);
 
