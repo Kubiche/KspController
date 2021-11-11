@@ -8,6 +8,10 @@
 KerbalSimpit mySimpit(Serial);
 
 byte digit[8]; //array to store the max7219 digit values.
+byte bar1Mask[2] {0b00000000, 0b00111111};
+byte bar2Mask[2] {0b11000000, 0b00001111};
+byte bar3Mask[2] {0b11110000, 0b00000011};
+byte bar4Mask[2] {0b11111100, 0b00000000};
 
 LedControl lc=LedControl(12,11,10,1);
 
@@ -23,24 +27,23 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         mySStageFuel = parseResource(msg);
         switch (map(mySStageFuel.available, 0, mySStageFuel.total, 0, 50)){
           case 0:
-            digit[0] = 0B00000000;
+            digit[0] = digit[0] & bar1Mask[0];
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] = digit[1] & bar1Mask[1];
             lc.setRow(0,1,digit[1]);                        
             break;
           case 5:
-            digit[0] = 0B10000000;
+            digit[0] = digit[0] & bar1Mask[0];
+            digit[0] = 0b10000000;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] = digit[1] & bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;        
           case 10:
+            digit[0] = digit[0] & bar1Mask[0];
             digit[0] = 0b11000000;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] = digit[1] & bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
           case 15: 
