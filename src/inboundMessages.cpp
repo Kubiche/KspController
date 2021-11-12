@@ -30,11 +30,19 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         show_in_bar_2(map(myLStageFuel.available, 0, myLStageFuel.total, 0, 50));
       }
     break;
-
-
-
-
+  case MONO_MESSAGE:
+      if (msgSize == sizeof(resourceMessage)){
+        resourceMessage myMonoFuel;
+        myMonoFuel = parseResource(msg);
+        show_in_bar_3(map(myMonoFuel.available, 0, myMonoFuel.total, 0, 50));
+      }
+    break;
+  case ELECTRIC_MESSAGE:
+      if (msgSize == sizeof(resourceMessage)){
+        resourceMessage myBatteryLevel;
+        myBatteryLevel = parseResource(msg);
+        show_in_bar_4(map(myBatteryLevel.available, 0, myBatteryLevel.total, 0, 50));
+      }
+    break;
   }
-
-
 }
