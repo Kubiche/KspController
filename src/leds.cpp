@@ -1,13 +1,18 @@
 #include <LedControl.h>
 
-extern LedControl lc;
+
+extern LedControl lc; //reference to max7219 instance declared in main.cpp
 
 byte digit[8]; //array to store the max7219 digit values.
+
+// arrays to store mask for bit manupulation depending on the led bar
 byte bar1Mask[2] {0b00000000, 0b00111111};
 byte bar2Mask[2] {0b11000000, 0b00001111};
 byte bar3Mask[2] {0b11110000, 0b00000011};
 byte bar4Mask[2] {0b11111100, 0b00000000};
 
+
+// These functions apply a mask to the byte controlling the lower and upper part of each led bar and set a value on it leaving ones for other bars alone
 void show_in_bar_1(int value){
     switch (value){
           case 0:

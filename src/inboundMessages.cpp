@@ -3,13 +3,7 @@
 #include <KerbalSimpit.h>
 #include "leds.h"
 
-
-
-
-//extern LedControl lc;
-
-
-
+// Message handler required by simpit.
 void messageHandler(byte messageType, byte msg[], byte msgSize) {
   switch(messageType) {
   case SF_STAGE_MESSAGE:

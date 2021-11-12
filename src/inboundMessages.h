@@ -1,7 +1,4 @@
 #pragma once
 
 
-
-void setLED(int digit, int led, bool state);
-
-void messageHandler(byte messageType, byte msg[], byte msgSize);
+void messageHandler(byte messageType, byte msg[], byte msgSize); // Message handler required by simpit
