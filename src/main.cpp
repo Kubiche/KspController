@@ -1,9 +1,10 @@
 #include <Arduino.h>
 #include <LedControl.h>
 #include <KerbalSimpit.h>
+#include <PayloadStructs.h>
 
 
- 
+ unsigned long lastupdated;
 
 KerbalSimpit mySimpit(Serial);
 
@@ -17,7 +18,7 @@ LedControl lc=LedControl(12,11,10,1);
 
 void messageHandler(byte messageType, byte msg[], byte msgSize) {
   switch(messageType) {
-    case SF_STAGE_MESSAGE:
+  case SF_STAGE_MESSAGE:
       // Checking if the message is the size we expect is a very basic
       // way to confirm if the message was received properly.
       if (msgSize == sizeof(resourceMessage)){
@@ -27,85 +28,170 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         mySStageFuel = parseResource(msg);
         switch (map(mySStageFuel.available, 0, mySStageFuel.total, 0, 50)){
           case 0:
-            digit[0] = digit[0] & bar1Mask[0];
+            digit[0] = 0;            
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & bar1Mask[1];
+            digit[1] &= bar1Mask[1];
             lc.setRow(0,1,digit[1]);                        
             break;
-          case 5:
-            digit[0] = digit[0] & bar1Mask[0];
+          case 5:            
             digit[0] = 0b10000000;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & bar1Mask[1];            
+            digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;        
-          case 10:
-            digit[0] = digit[0] & bar1Mask[0];
+          case 10:            
             digit[0] = 0b11000000;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & bar1Mask[1];            
+            digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 15: 
+          case 15:            
             digit[0] = 0b11100000;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 20: 
+          case 20:            
             digit[0] = 0b11110000;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] &= bar1Mask[1];
             lc.setRow(0,1,digit[1]);
             break;
           case 25: 
             digit[0] = 0b11111000;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 30: 
+          case 30:             
             digit[0] = 0b11111100;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 35: 
+          case 35:            
             digit[0] = 0b11111110;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 40: 
+          case 40:             
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b00000000;
+            digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
           case 45:
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b10000000;
+            digit[1] &= bar1Mask[1];
+            digit[1] |= 0b10000000;
             lc.setRow(0,1,digit[1]);
             break;
           case 50:
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
-            digit[1] = digit[1] & 0b00111111;
-            digit[1] = digit[1] | 0b11000000;
+            digit[1] &= bar1Mask[1];
+            digit[1] |= 0b11000000;
             lc.setRow(0,1,digit[1]);
             break;  
         }      
       }
-            
+    break;
+  case LF_STAGE_MESSAGE:
+      if (msgSize == sizeof(resourceMessage)){
+        resourceMessage myLStageFuel;
+        myLStageFuel = parseResource(msg);
+        switch (map(myLStageFuel.available, 0, myLStageFuel.total, 0, 50)){
+        case 0:
+            digit[1] &= bar2Mask[0];            
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];
+            lc.setRow(0,2,digit[2]);                        
+            break;
+          case 5:            
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00100000;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];            
+            lc.setRow(0,2,digit[2]);
+            break;        
+          case 10:            
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00110000;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];            
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 15:            
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111000;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];            
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 20:            
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111100;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 25: 
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111110;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];            
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 30:             
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];            
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 35:            
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];
+            digit[2] |= 0b10000000;            
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 40:             
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];
+            digit[2] |= 0b11000000;            
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 45:
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];
+            digit[2] |= 0b11100000;
+            lc.setRow(0,2,digit[2]);
+            break;
+          case 50:
+            digit[1] &= bar2Mask[0];
+            digit[1] |= 0b00111111;
+            lc.setRow(0,1,digit[1]);
+            digit[2] &= bar2Mask[1];
+            digit[2] |= 0b11110000;
+            lc.setRow(0,2,digit[2]);
+            break;
+        }
+      }
+      break;
+
+
+
+
   }
+
 
 }
 
@@ -124,19 +210,16 @@ void setup() {
   mySimpit.registerChannel(LF_STAGE_MESSAGE);
   mySimpit.registerChannel(MONO_MESSAGE);
   mySimpit.registerChannel(ELECTRIC_MESSAGE);
+
+  
 }
 
 void loop() {
 
-  mySimpit.update(); // Update with the mod
-  delay(500);
+  if ((millis() - lastupdated) > 100) {
+    mySimpit.update(); // Update with the mod
 
+  }
   
 
-
-
-
-  
-
- 
 }
