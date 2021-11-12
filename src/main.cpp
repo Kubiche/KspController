@@ -2,14 +2,12 @@
 #include <LedControl.h>
 #include <KerbalSimpit.h>
 #include "inboundMessages.h"
+#include "leds.h"
 
-
-
-unsigned long lastupdated;
 
 KerbalSimpit mySimpit(Serial);
 
-//LedControl lc=LedControl(12,11,10,1);
+LedControl lc=LedControl(12,11,10,1);
 
 
 void setup() {
@@ -17,11 +15,12 @@ void setup() {
   Serial.begin(115200); // Initialize Serial connection to mod
   while (!mySimpit.init()); 
   
-  initializeBars();
+  lc.shutdown(0,false); // Turn on the led controller  
+  lc.clearDisplay(0);
 
   mySimpit.inboundHandler(messageHandler); // callback function
   
-  // Register to fuel messages  
+  // Register to desired messages from simpit
   mySimpit.registerChannel(SF_STAGE_MESSAGE);
   mySimpit.registerChannel(LF_STAGE_MESSAGE);
   mySimpit.registerChannel(MONO_MESSAGE);
@@ -31,11 +30,7 @@ void setup() {
 }
 
 void loop() {
-
-  if ((millis() - lastupdated) > 100) {
-    mySimpit.update(); // Update with the mod
-
-  }
   
+  mySimpit.update(); // Update messages from simpit 
 
 }
