@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <LedControl.h>
 #include <KerbalSimpit.h>
 #include "leds.h"
 

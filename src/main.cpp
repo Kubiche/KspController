@@ -16,6 +16,7 @@ void setup() {
   while (!mySimpit.init()); 
   
   lc.shutdown(0,false); // Turn on the led controller  
+  lc.setIntensity(0,1);
   lc.clearDisplay(0);
 
   mySimpit.inboundHandler(messageHandler); // callback function
