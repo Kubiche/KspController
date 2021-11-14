@@ -3,7 +3,7 @@
 
 extern LedControl lc; //reference to max7219 instance declared in main.cpp
 
-byte digit[8]; //array to store the max7219 digit values.
+byte digit[8] {0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}; //array to store the max7219 digit values.
 
 // arrays to store mask for bit manupulation depending on the led bar
 byte bar1Mask[2] {0b00000000, 0b00111111};
@@ -16,67 +16,67 @@ byte bar4Mask[2] {0b11111100, 0b00000000};
 void show_in_bar_1(int value){
     switch (value){
           case 0:
-            digit[0] = 0;            
+            digit[0] = 0b00000000;            
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];
             lc.setRow(0,1,digit[1]);                        
             break;
-          case 5:            
+          case 10:            
             digit[0] = 0b10000000;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;        
-          case 10:            
+          case 20:            
             digit[0] = 0b11000000;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 15:            
+          case 30:            
             digit[0] = 0b11100000;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 20:            
+          case 40:            
             digit[0] = 0b11110000;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];
             lc.setRow(0,1,digit[1]);
             break;
-          case 25: 
+          case 50: 
             digit[0] = 0b11111000;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 30:             
+          case 60:             
             digit[0] = 0b11111100;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 35:            
+          case 70:            
             digit[0] = 0b11111110;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 40:             
+          case 80:             
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];            
             lc.setRow(0,1,digit[1]);
             break;
-          case 45:
+          case 90:
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];
             digit[1] |= 0b10000000;
             lc.setRow(0,1,digit[1]);
             break;
-          case 50:
+          case 100:
             digit[0] = 0b11111111;
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];
@@ -94,49 +94,49 @@ void show_in_bar_2(int value){
             digit[2] &= bar2Mask[1];
             lc.setRow(0,2,digit[2]);                        
             break;
-          case 5:            
+          case 10:            
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00100000;
             lc.setRow(0,1,digit[1]);
             digit[2] &= bar2Mask[1];            
             lc.setRow(0,2,digit[2]);
             break;        
-          case 10:            
+          case 20:            
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00110000;
             lc.setRow(0,1,digit[1]);
             digit[2] &= bar2Mask[1];            
             lc.setRow(0,2,digit[2]);
             break;
-          case 15:            
+          case 30:            
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111000;
             lc.setRow(0,1,digit[1]);
             digit[2] &= bar2Mask[1];            
             lc.setRow(0,2,digit[2]);
             break;
-          case 20:            
+          case 40:            
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111100;
             lc.setRow(0,1,digit[1]);
             digit[2] &= bar2Mask[1];
             lc.setRow(0,2,digit[2]);
             break;
-          case 25: 
+          case 50: 
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111110;
             lc.setRow(0,1,digit[1]);
             digit[2] &= bar2Mask[1];            
             lc.setRow(0,2,digit[2]);
             break;
-          case 30:             
+          case 60:             
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111111;
             lc.setRow(0,1,digit[1]);
             digit[2] &= bar2Mask[1];            
             lc.setRow(0,2,digit[2]);
             break;
-          case 35:            
+          case 70:            
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111111;
             lc.setRow(0,1,digit[1]);
@@ -144,7 +144,7 @@ void show_in_bar_2(int value){
             digit[2] |= 0b10000000;            
             lc.setRow(0,2,digit[2]);
             break;
-          case 40:             
+          case 80:             
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111111;
             lc.setRow(0,1,digit[1]);
@@ -152,7 +152,7 @@ void show_in_bar_2(int value){
             digit[2] |= 0b11000000;            
             lc.setRow(0,2,digit[2]);
             break;
-          case 45:
+          case 90:
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111111;
             lc.setRow(0,1,digit[1]);
@@ -160,7 +160,7 @@ void show_in_bar_2(int value){
             digit[2] |= 0b11100000;
             lc.setRow(0,2,digit[2]);
             break;
-          case 50:
+          case 100:
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00111111;
             lc.setRow(0,1,digit[1]);
@@ -179,35 +179,35 @@ void show_in_bar_3(int value){
             digit[3] &= bar3Mask[1];
             lc.setRow(0,3,digit[3]);                        
             break;
-          case 5:            
+          case 10:            
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001000;
             lc.setRow(0,2,digit[2]);
             digit[3] &= bar3Mask[1];            
             lc.setRow(0,3,digit[3]);
             break;        
-          case 10:            
+          case 20:            
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001100;
             lc.setRow(0,2,digit[2]);
             digit[3] &= bar3Mask[1];            
             lc.setRow(0,3,digit[3]);
             break;
-          case 15:            
+          case 30:            
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001110;
             lc.setRow(0,2,digit[2]);
             digit[3] &= bar3Mask[1];            
             lc.setRow(0,3,digit[3]);
             break;
-          case 20:            
+          case 40:            
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001111;
             lc.setRow(0,2,digit[2]);
             digit[3] &= bar3Mask[1];
             lc.setRow(0,3,digit[3]);
             break;
-          case 25: 
+          case 50: 
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001111;
             lc.setRow(0,2,digit[2]);
@@ -215,7 +215,7 @@ void show_in_bar_3(int value){
             digit[3] |= 0b10000000;            
             lc.setRow(0,3,digit[3]);
             break;
-          case 30:             
+          case 60:             
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001111;
             lc.setRow(0,2,digit[2]);
@@ -223,7 +223,7 @@ void show_in_bar_3(int value){
             digit[3] |= 0b11000000;            
             lc.setRow(0,3,digit[3]);
             break;
-          case 35:            
+          case 70:            
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001111;
             lc.setRow(0,2,digit[2]);
@@ -231,7 +231,7 @@ void show_in_bar_3(int value){
             digit[3] |= 0b11100000;            
             lc.setRow(0,3,digit[3]);
             break;
-          case 40:             
+          case 80:             
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001111;
             lc.setRow(0,2,digit[2]);
@@ -239,7 +239,7 @@ void show_in_bar_3(int value){
             digit[3] |= 0b11110000;            
             lc.setRow(0,3,digit[3]);
             break;
-          case 45:
+          case 90:
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001111;
             lc.setRow(0,2,digit[2]);
@@ -247,7 +247,7 @@ void show_in_bar_3(int value){
             digit[3] |= 0b11111000;
             lc.setRow(0,3,digit[3]);
             break;
-          case 50:
+          case 100:
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001111;
             lc.setRow(0,2,digit[2]);
@@ -268,21 +268,21 @@ void show_in_bar_4(int value){
             digit[4] &= bar4Mask[1];
             lc.setRow(0,4,digit[4]);                        
             break;
-          case 5:            
+          case 10:            
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000010;
             lc.setRow(0,3,digit[3]);
             digit[4] &= bar4Mask[1];            
             lc.setRow(0,4,digit[4]);
             break;        
-          case 10:            
+          case 20:            
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
             digit[3] &= bar4Mask[1];            
             lc.setRow(0,4,digit[4]);
             break;
-          case 15:            
+          case 30:            
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
@@ -290,7 +290,7 @@ void show_in_bar_4(int value){
             digit[4] |= 0b1000000;            
             lc.setRow(0,4,digit[4]);
             break;
-          case 20:            
+          case 40:            
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
@@ -298,7 +298,7 @@ void show_in_bar_4(int value){
             digit[4] |= 0b1100000;
             lc.setRow(0,4,digit[4]);
             break;
-          case 25: 
+          case 50: 
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
@@ -306,7 +306,7 @@ void show_in_bar_4(int value){
             digit[4] |= 0b11100000;            
             lc.setRow(0,4,digit[4]);
             break;
-          case 30:             
+          case 60:             
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
@@ -314,7 +314,7 @@ void show_in_bar_4(int value){
             digit[4] |= 0b11110000;            
             lc.setRow(0,4,digit[4]);
             break;
-          case 35:            
+          case 70:            
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
@@ -322,7 +322,7 @@ void show_in_bar_4(int value){
             digit[4] |= 0b11111000;            
             lc.setRow(0,4,digit[4]);
             break;
-          case 40:             
+          case 80:             
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
@@ -330,7 +330,7 @@ void show_in_bar_4(int value){
             digit[4] |= 0b11111100;            
             lc.setRow(0,4,digit[4]);
             break;
-          case 45:
+          case 90:
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);
@@ -338,7 +338,7 @@ void show_in_bar_4(int value){
             digit[4] |= 0b11111110;
             lc.setRow(0,4,digit[4]);
             break;
-          case 50:
+          case 100:
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000011;
             lc.setRow(0,3,digit[3]);

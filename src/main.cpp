@@ -3,11 +3,12 @@
 #include <KerbalSimpit.h>
 #include "inboundMessages.h"
 #include "leds.h"
+#include "controls.h"
 
 
 KerbalSimpit mySimpit(Serial);
 
-LedControl lc=LedControl(12,11,10,1);
+LedControl lc=LedControl(11,13,10,1);
 
 
 void setup() {
@@ -16,8 +17,10 @@ void setup() {
   while (!mySimpit.init()); 
   
   lc.shutdown(0,false); // Turn on the led controller  
-  lc.setIntensity(0,1);
+  lc.setIntensity(0,8);
   lc.clearDisplay(0);
+
+  
 
   mySimpit.inboundHandler(messageHandler); // callback function
   
@@ -30,8 +33,12 @@ void setup() {
   
 }
 
-void loop() {
+void loop() {  
   
-  mySimpit.update(); // Update messages from simpit 
+  mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
+
+  update_Controls();
+
+                       
 
 }
