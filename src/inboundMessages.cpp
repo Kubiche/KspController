@@ -37,14 +37,24 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myMonoFuel;
         myMonoFuel = parseResource(msg);
-        show_in_bar_3(map(myMonoFuel.available, 0, myMonoFuel.total, 0, 10));
+        if (myMonoFuel.available == 0){
+          show_in_bar_3(0);
+        }
+        else {
+          show_in_bar_3(map(myMonoFuel.available, 0, myMonoFuel.total, 1, 10));
+        }
       }
     break;
   case ELECTRIC_MESSAGE:
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myBatteryLevel;
         myBatteryLevel = parseResource(msg);
-        show_in_bar_4(map(myBatteryLevel.available, 0, myBatteryLevel.total, 0, 10));
+        if (myBatteryLevel.available == 0){
+          show_in_bar_4(0);
+        }
+        else {        
+        show_in_bar_4(map(myBatteryLevel.available, 0, myBatteryLevel.total, 1, 10));
+        }
       }
     break;
   }
