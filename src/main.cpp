@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <LedControl.h>
 #include <KerbalSimpit.h>
+#include <Adafruit_MCP23X17.h>
+#include <Adafruit_MCP3008.h>
 #include "inboundMessages.h"
 #include "leds.h"
 #include "controls.h"
@@ -38,7 +40,7 @@ void loop() {
   
   mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
 
-  update_Analog_Controls();
+  read_Right_Analog_Stick();
 
                        
 

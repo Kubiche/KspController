@@ -5,7 +5,7 @@
 // Message handler required by simpit.
 void messageHandler(byte messageType, byte msg[], byte msgSize) {
   switch(messageType) {
-  case SF_STAGE_MESSAGE:
+  case SF_STAGE_MESSAGE: //Current stage solid fuel
       // Checking if the message is the size we expect is a very basic
       // way to confirm if the message was received properly.
       if (msgSize == sizeof(resourceMessage)){
@@ -21,7 +21,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }      
       }
     break;
-  case LF_STAGE_MESSAGE:
+  case LF_STAGE_MESSAGE: //Current stage liquid fuel
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myLStageFuel;
         myLStageFuel = parseResource(msg);
@@ -33,7 +33,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
       }
     break;
-  case MONO_MESSAGE:
+  case MONO_MESSAGE: //Vessel total Monopropellant fuel
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myMonoFuel;
         myMonoFuel = parseResource(msg);
@@ -45,7 +45,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
       }
     break;
-  case ELECTRIC_MESSAGE:
+  case ELECTRIC_MESSAGE: //Vessel total Battery charge
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myBatteryLevel;
         myBatteryLevel = parseResource(msg);
@@ -54,6 +54,30 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
         else {        
         show_in_bar_4(map(myBatteryLevel.available, 0, myBatteryLevel.total, 1, 10));
+        }
+      }
+    break;
+  case SF_MESSAGE:  ////Vessel total Solid fuel
+      if (msgSize == sizeof(resourceMessage)){
+        resourceMessage mySFuel;
+        mySFuel = parseResource(msg);
+        if (mySFuel.available == 0){
+          show_in_bar_1(0);
+        }
+        else {
+          show_in_bar_1(map(mySFuel.available, 0, mySFuel.total, 1, 10));
+        }
+      }
+    break;  
+  case LF_MESSAGE:  ////Vessel total Liquid fuel
+      if (msgSize == sizeof(resourceMessage)){
+        resourceMessage myLFuel;
+        myLFuel = parseResource(msg);
+        if (myLFuel.available == 0){
+          show_in_bar_2(0);
+        }
+        else {
+          show_in_bar_2(map(myLFuel.available, 0, myLFuel.total, 1, 10));
         }
       }
     break;
