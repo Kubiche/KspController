@@ -14,13 +14,7 @@ byte bar4Mask[2] {0b11111100, 0b00000000};
 
 // These functions apply a mask to the byte controlling the lower and upper part of each led bar and set a value on it leaving ones for other bars alone
 void show_in_bar_1(int value){
-    switch (value){
-          case 0:
-            digit[0] = 0b00000000;            
-            lc.setRow(0,0,digit[0]);
-            digit[1] &= bar1Mask[1];
-            lc.setRow(0,1,digit[1]);                        
-            break;
+    switch (value){          
           case 1:            
             digit[0] = 0b10000000;
             lc.setRow(0,0,digit[0]);
@@ -83,25 +77,17 @@ void show_in_bar_1(int value){
             digit[1] |= 0b11000000;
             lc.setRow(0,1,digit[1]);
             break;
-          default:
-            digit[0] &= bar1Mask[0];
-            digit[0] |= 0;
+          default:            
+            digit[0] = 0b00000000;            
             lc.setRow(0,0,digit[0]);
             digit[1] &= bar1Mask[1];
-            digit[1] |= 0;
-            lc.setRow(0,1,digit[1]);
-            break;  
+            lc.setRow(0,1,digit[1]);                        
+            break; 
         }
 }
 
 void show_in_bar_2(int value){
-    switch (value){
-        case 0:
-            digit[1] &= bar2Mask[0];            
-            lc.setRow(0,1,digit[1]);
-            digit[2] &= bar2Mask[1];
-            lc.setRow(0,2,digit[2]);                        
-            break;
+    switch (value){        
           case 1:            
             digit[1] &= bar2Mask[0];
             digit[1] |= 0b00100000;
@@ -177,25 +163,17 @@ void show_in_bar_2(int value){
             lc.setRow(0,2,digit[2]);
             break;
           default:
-            digit[1] &= bar2Mask[0];
-            digit[1] |= 0;
+            digit[1] &= bar2Mask[0];            
             lc.setRow(0,1,digit[1]);
             digit[2] &= bar2Mask[1];
-            digit[2] |= 0;
             lc.setRow(0,2,digit[2]);
             break;
         }
 }
 
 void show_in_bar_3(int value){
-    switch (value){
-        case 0:
-            digit[2] &= bar3Mask[0];            
-            lc.setRow(0,2,digit[2]);
-            digit[3] &= bar3Mask[1];
-            lc.setRow(0,3,digit[3]);                        
-            break;
-          case 1:            
+    switch (value){            
+            case 1:            
             digit[2] &= bar3Mask[0];
             digit[2] |= 0b00001000;
             lc.setRow(0,2,digit[2]);
@@ -272,11 +250,9 @@ void show_in_bar_3(int value){
             lc.setRow(0,3,digit[3]);
             break;
           default:
-            digit[2] &= bar3Mask[0];
-            digit[2] |= 0;
+            digit[2] &= bar3Mask[0];            
             lc.setRow(0,2,digit[2]);
             digit[3] &= bar3Mask[1];
-            digit[3] |= 0;
             lc.setRow(0,3,digit[3]);
             break;
         }
@@ -286,12 +262,6 @@ void show_in_bar_3(int value){
 
 void show_in_bar_4(int value){
     switch (value){
-        case 0:
-            digit[3] &= bar4Mask[0];            
-            lc.setRow(0,3,digit[3]);
-            digit[4] &= bar4Mask[1];
-            lc.setRow(0,4,digit[4]);                        
-            break;
           case 1:            
             digit[3] &= bar4Mask[0];
             digit[3] |= 0b0000010;
@@ -371,14 +341,10 @@ void show_in_bar_4(int value){
             lc.setRow(0,4,digit[4]);
             break;
           default:
-            digit[3] &= bar4Mask[0];
-            digit[3] |= 0;
+            digit[3] &= bar4Mask[0];            
             lc.setRow(0,3,digit[3]);
             digit[4] &= bar4Mask[1];
-            digit[4] |= 0;
             lc.setRow(0,4,digit[4]);
             break;
         }
-
-
 }
