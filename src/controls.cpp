@@ -6,7 +6,7 @@ extern KerbalSimpit mySimpit;
 
 
 
-void update_Controls(){
+void update_Analog_Controls(){
 
   
 

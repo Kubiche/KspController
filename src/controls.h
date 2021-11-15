@@ -3,4 +3,4 @@
 #define throttlePin A0;
 
 
-void update_Controls();
+void update_Analog_Controls();

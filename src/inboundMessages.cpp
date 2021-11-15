@@ -13,28 +13,38 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         resourceMessage mySStageFuel;
         // Convert the message we received to an Resource struct.
         mySStageFuel = parseResource(msg);
-        show_in_bar_1(map(mySStageFuel.available, 0, mySStageFuel.total, 0, 100));      
+        if (mySStageFuel.available == 0){
+          show_in_bar_1(0);
+        }
+        else {
+        show_in_bar_1(map(mySStageFuel.available, 0, mySStageFuel.total, 1, 10));
+        }      
       }
     break;
   case LF_STAGE_MESSAGE:
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myLStageFuel;
         myLStageFuel = parseResource(msg);
-        show_in_bar_2(map(myLStageFuel.available, 0, myLStageFuel.total, 0, 100));
+        if (myLStageFuel.available == 0){
+          show_in_bar_2(0);
+        }
+        else {
+          show_in_bar_2(map(myLStageFuel.available, 0, myLStageFuel.total, 1, 10));
+        }
       }
     break;
   case MONO_MESSAGE:
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myMonoFuel;
         myMonoFuel = parseResource(msg);
-        show_in_bar_3(map(myMonoFuel.available, 0, myMonoFuel.total, 0, 100));
+        show_in_bar_3(map(myMonoFuel.available, 0, myMonoFuel.total, 0, 10));
       }
     break;
   case ELECTRIC_MESSAGE:
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myBatteryLevel;
         myBatteryLevel = parseResource(msg);
-        show_in_bar_4(map(myBatteryLevel.available, 0, myBatteryLevel.total, 0, 100));
+        show_in_bar_4(map(myBatteryLevel.available, 0, myBatteryLevel.total, 0, 10));
       }
     break;
   }
