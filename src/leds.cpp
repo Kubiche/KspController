@@ -1,7 +1,7 @@
-#include <LedControl.h>
+#include <LedControl_HW_SPI.h>
 
 
-extern LedControl lc; //reference to max7219 instance declared in main.cpp
+extern LedControl_HW_SPI lc; //reference to max7219 instance declared in main.cpp
 
 byte digit[5] {0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}; //array to store the max7219 digit values to be used by the 4 led bars.
 
