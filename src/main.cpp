@@ -18,8 +18,7 @@ void setup() {
   lc.shutdown(0,false); // Turn on the led controller  
   lc.setIntensity(0,5);
   lc.clearDisplay(0);  
-  lc.setRow(0,5,byte(255));
-  lc.setRow(0,0,byte(255));
+  
   
   //----------------------------------------------------------------------Write any test code abocve here since the while below will kill code if not connected to simpit.---------------------------------------------------------------------------------------------
   Serial.begin(115200); // Initialize Serial connection to mod
