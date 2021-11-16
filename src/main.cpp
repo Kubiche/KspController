@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <LedControl.h>
+#include <LedControl_HW_SPI.h>
 #include <KerbalSimpit.h>
 #include <Adafruit_MCP23X17.h>
 #include <Adafruit_MCP3008.h>
@@ -10,11 +10,12 @@
 
 KerbalSimpit mySimpit(Serial);
 
-LedControl lc=LedControl(11,13,10,1);
+LedControl_HW_SPI lc=LedControl_HW_SPI();
 
 
 void setup() {
-
+  
+  lc.begin(10, 1, 10000000);
   lc.shutdown(0,false); // Turn on the led controller  
   lc.setIntensity(0,5);
   lc.clearDisplay(0);  
