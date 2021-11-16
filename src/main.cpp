@@ -15,7 +15,7 @@ LedControl_HW_SPI lc=LedControl_HW_SPI();
 
 void setup() {
   
-  lc.begin(10, 1, 10000000);
+  lc.begin(10);
   lc.shutdown(0,false); // Turn on the led controller  
   lc.setIntensity(0,5);
   lc.clearDisplay(0);  
