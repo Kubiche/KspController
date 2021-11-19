@@ -12,16 +12,30 @@ KerbalSimpit mySimpit(Serial);
 
 LedControl_HW_SPI lc=LedControl_HW_SPI();
 
+Adafruit_MCP3008 adc;
+
+Adafruit_MCP23X17 io;
+
 
 void setup() {
   
+  //Led driver related
   lc.begin(10);
   lc.shutdown(0,false); // Turn on the led controller  
   lc.setIntensity(0,5);
-  lc.clearDisplay(0);  
+  lc.clearDisplay(0); 
+
+  //ADC MCP3008 related
+  adc.begin(9);
+
+  //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
+
+  //IO expander MCP23017 related
+  if (!io.begin_I2C(0x20)) {     //address not set in circuit as fo now
+    //while (1);  //uncomment once actually added
+  } 
   
   
-  //----------------------------------------------------------------------Write any test code abocve here since the while below will kill code if not connected to simpit.---------------------------------------------------------------------------------------------
   Serial.begin(115200); // Initialize Serial connection to mod
   while (!mySimpit.init()); 
 
