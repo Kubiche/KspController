@@ -10,30 +10,36 @@
 
 KerbalSimpit mySimpit(Serial);
 
-LedControl_HW_SPI lc=LedControl_HW_SPI();
+LedControl_HW_SPI lc = LedControl_HW_SPI();
 
 Adafruit_MCP3008 adc;
 
 Adafruit_MCP23X17 io;
 
+#define io_int_pin 8
+
 
 void setup() {
   
-  //Led driver related
+  //Led driver MAX7219
   lc.begin(10);
   lc.shutdown(0,false); // Turn on the led controller  
   lc.setIntensity(0,5);
   lc.clearDisplay(0); 
 
-  //ADC MCP3008 related
+  //ADC MCP3008
   adc.begin(9);
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
 
-  //IO expander MCP23017 related
+  //IO expander MCP23017
   if (!io.begin_I2C(0x20)) {     //address not set in circuit as fo now
     //while (1);  //uncomment once actually added
   } 
+  io.setupInterrupts(true, false, LOW); //sets up interrupts to be mirrored, be pulled high and to pull the pin low if interrupt occurs.
+  for (int i = 0 ; i < 16; i++){  
+    io.pinMode(i, INPUT_PULLUP); //set up all the pins as input and pull them high
+  }
   
   
   Serial.begin(115200); // Initialize Serial connection to mod
@@ -54,7 +60,9 @@ void loop() {
   
   mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
 
-  read_Right_Analog_Stick();
+  if (digitalRead(io_int_pin) == LOW) {
+      
+  }
 
                        
 
