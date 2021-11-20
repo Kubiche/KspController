@@ -33,7 +33,7 @@ void setup() {
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
 
   //IO expander MCP23017
-  if (!io.begin_I2C(0x20)) {     //address not set in circuit as fo now
+  if (!io.begin_I2C(0x21)) {     //address set as A0 pulled high, A1 and A2 low.
     //while (1);  //uncomment once actually added
   } 
   io.setupInterrupts(true, false, LOW); //sets up interrupts to be mirrored, be pulled high and to pull the pin low if interrupt occurs.
