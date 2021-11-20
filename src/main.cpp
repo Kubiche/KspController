@@ -64,6 +64,10 @@ void loop() {
       
   }
 
+  throttleMessage throttle_msg;
+  throttle_msg.throttle = map(adc.readADC(0), 0, 1023, 0, INT16_MAX);
+  mySimpit.send(THROTTLE_MESSAGE, throttle_msg);
+
                        
 
 }
