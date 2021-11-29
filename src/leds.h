@@ -22,7 +22,7 @@
 
 
 //functions to control led rows at a time
-void setLed(uint8_t opcode, byte val);
+void setLedReg(uint8_t opcode, byte val);
 
 // functions to diplay mapped values into 10 segment led bars
 void show_in_bar_1(int value);

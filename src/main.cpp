@@ -22,12 +22,12 @@ void setup() {
   //Led driver MAX7219  
   pinMode(LED_CS, OUTPUT); // Set the CS pin as output
   digitalWrite(LED_CS, HIGH); // Set CS pin to High
-  setLed(OP_SHUTDOWN, 1); // Turn LED controller on
-  setLed(OP_SCANLIMIT, 7); // set to scan all digits
-  setLed(OP_INTENSITY, 2); // Set intensity to 2 of 16
+  setLedReg(OP_SHUTDOWN, 1); // Turn LED controller on
+  setLedReg(OP_SCANLIMIT, 7); // set to scan all digits
+  setLedReg(OP_INTENSITY, 2); // Set intensity to 2 of 16
   //clear the display
   for (int i=8; i>0; i--){
-    setLed(i, 0);
+    setLedReg(i, 0);
   }  
   
   
