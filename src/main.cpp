@@ -55,6 +55,7 @@ void setup() {
   mySimpit.registerChannel(LF_STAGE_MESSAGE);
   mySimpit.registerChannel(MONO_MESSAGE);
   mySimpit.registerChannel(ELECTRIC_MESSAGE);
+  mySimpit.registerChannel(ACTIONSTATUS_MESSAGE);
 
   
 }

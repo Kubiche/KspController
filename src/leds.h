@@ -24,6 +24,9 @@
 //functions to control led rows at a time
 void setLedReg(uint8_t opcode, byte val);
 
+//Funtion for individual led toggling
+void setLed(uint8_t dig, uint8_t seg, bool state);
+
 // functions to diplay mapped values into 10 segment led bars
 void show_in_bar_1(int value);
 void show_in_bar_2(int value);

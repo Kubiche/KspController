@@ -16,6 +16,14 @@ void setLedReg(uint8_t opcode, byte val) {
   SPI.endTransaction();
 }
 
+void setLed(uint8_t dig, uint8_t seg, bool state){
+  uint8_t mask = 0b10000000 >>(seg-1);
+  if ((digit[dig] & mask) != state){
+    digit[dig] ^= mask; 
+    setLedReg((dig+1), digit[dig]);
+  }
+}
+
 // arrays to store mask for bit manupulation depending on the led bar
 byte bar1Mask[2] {0b00000000, 0b00111111};
 byte bar2Mask[2] {0b11000000, 0b00001111};
