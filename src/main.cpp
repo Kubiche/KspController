@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <LedControl_HW_SPI.h>
+//#include <LedControl_HW_SPI.h>
 #include <KerbalSimpit.h>
 #include <Adafruit_MCP23X17.h>
 #include <Adafruit_MCP3008.h>
@@ -10,7 +10,7 @@
 
 KerbalSimpit mySimpit(Serial);
 
-LedControl_HW_SPI lc = LedControl_HW_SPI();
+//LedControl_HW_SPI lc = LedControl_HW_SPI();
 
 Adafruit_MCP3008 adc;
 
@@ -18,14 +18,18 @@ Adafruit_MCP23X17 io;
 
 #define io_int_pin 8
 
-
 void setup() {
   
   //Led driver MAX7219
-  lc.begin(10);
-  lc.shutdown(0,false); // Turn on the led controller  
-  lc.setIntensity(0,5);
-  lc.clearDisplay(0); 
+  pinMode(LED_CS, OUTPUT);
+  digitalWrite(LED_CS, HIGH);
+  setLed(OP_SHUTDOWN, 1);
+  setLed(OP_SCANLIMIT, 7);
+  setLed(OP_INTENSITY, 2);
+  for (int i = 8; i > 0; i--){
+    setLed(i, digit[i-1]);
+  }
+  
 
   //ADC MCP3008
   adc.begin(9);
