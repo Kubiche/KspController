@@ -1,17 +1,13 @@
 #include <spi.h>
 #include "leds.h"
 
-//extern LedControl_HW_SPI lc; //reference to max7219 instance declared in main.cpp
-
-
-
-
-
 
 byte digit[8] {0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}; //array to store the max7219 digit values to be used by the leds
 
 void setLed(uint8_t opcode, byte val) {
-  byte led_buffer[2] {opcode, val};  
+  byte led_buffer[2];
+  led_buffer[0] = opcode;
+  led_buffer[1] = val; 
   SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   digitalWrite(LED_CS, LOW);
   SPI.transfer(led_buffer[0]);

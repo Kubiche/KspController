@@ -19,7 +19,7 @@
 #define OP_SHUTDOWN    0x0C
 #define OP_DISPLAYTEST 0x0F
 
-extern byte digit[8];
+
 
 //functions to control led rows at a time
 void setLed(uint8_t opcode, byte val);
