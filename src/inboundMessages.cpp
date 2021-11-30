@@ -81,5 +81,14 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
       }
     break;
+  case ACTIONSTATUS_MESSAGE:  ////Vessel total Solid fuel
+    if (msg[0] & SAS_ACTION){
+      setLed(7, 1, true);      
+    }
+    else{
+      setLed(7,1,false);
+    } 
+    break;
   }
+
 }
