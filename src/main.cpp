@@ -17,9 +17,9 @@ Adafruit_MCP23X17 io;
 // Create the Joystick
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
   1, 0,                  // Button Count, Hat Switch Count
-  true, true, false,     // X and Y, but no Z Axis
+  true, true, true,     // X and Y and Z Axis
   false, false, false,   // No Rx, Ry, or Rz
-  false, true,          // No rudder or  yes throttle
+  false, false,          // No rudder or throttle
   false, false, false);  // No accelerator, brake, or steering
 
 #define io_int_pin 8
@@ -79,8 +79,8 @@ void loop() {
   if (digitalRead(io_int_pin) == LOW) {
       
   }
-  int throttle_val =  adc.readADC(0);
-  Joystick.setThrottle(throttle_val);
+  int throttle_val =  map(adc.readADC(0), 0, 1023, 0, 255);
+  Joystick.setZAxis(throttle_val);
 
                        
 
