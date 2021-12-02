@@ -2,6 +2,7 @@
 #include <KerbalSimpit.h>
 #include <Adafruit_MCP23X17.h>
 #include <Adafruit_MCP3008.h>
+#include <Joystick.h>
 #include "inboundMessages.h"
 #include "leds.h"
 #include "controls.h"
@@ -13,11 +14,22 @@ Adafruit_MCP3008 adc;
 
 Adafruit_MCP23X17 io;
 
+// Create the Joystick
+Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
+  1, 0,                  // Button Count, Hat Switch Count
+  true, true, false,     // X and Y, but no Z Axis
+  false, false, false,   // No Rx, Ry, or Rz
+  false, true,          // No rudder or  yes throttle
+  false, false, false);  // No accelerator, brake, or steering
+
 #define io_int_pin 8
 
 void setup() {
 
   SPI.begin();
+
+  // Initialize Joystick Library
+	Joystick.begin();
   
   //Led driver MAX7219  
   pinMode(LED_CS, OUTPUT); // Set the CS pin as output
@@ -46,7 +58,7 @@ void setup() {
   
   
   Serial.begin(115200); // Initialize Serial connection to mod
-  while (!mySimpit.init()); 
+  //while (!mySimpit.init()); 
 
   mySimpit.inboundHandler(messageHandler); // callback function
   
@@ -67,11 +79,8 @@ void loop() {
   if (digitalRead(io_int_pin) == LOW) {
       
   }
-
-  //throttle message to simpit mod
-  throttleMessage throttle_msg;
-  throttle_msg.throttle = map(adc.readADC(0), 0, 1023, 0, INT16_MAX);
-  mySimpit.send(THROTTLE_MESSAGE, throttle_msg);
+  int throttle_val =  adc.readADC(0);
+  Joystick.setThrottle(throttle_val);
 
                        
 
