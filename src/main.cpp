@@ -3,6 +3,7 @@
 #include <Adafruit_MCP23X17.h>
 #include <Adafruit_MCP3008.h>
 #include <Joystick.h>
+#include <HID.h>
 #include "inboundMessages.h"
 #include "leds.h"
 #include "controls.h"
@@ -15,10 +16,10 @@ Adafruit_MCP3008 adc;
 Adafruit_MCP23X17 io;
 
 // Create the Joystick
-Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
+Joystick_ Joystick(0x05,0x04,
   1, 0,                  // Button Count, Hat Switch Count
-  true, true, true,     // X and Y and Z Axis
-  false, false, false,   // No Rx, Ry, or Rz
+  false, false, false,     // X and Y and Z Axis
+  true, true, true,   // No Rx, Ry, or Rz
   false, false,          // No rudder or throttle
   false, false, false);  // No accelerator, brake, or steering
 
@@ -30,6 +31,7 @@ void setup() {
 
   // Initialize Joystick Library
 	Joystick.begin();
+  
   
   //Led driver MAX7219  
   pinMode(LED_CS, OUTPUT); // Set the CS pin as output
@@ -58,7 +60,7 @@ void setup() {
   
   
   Serial.begin(115200); // Initialize Serial connection to mod
-  //while (!mySimpit.init()); 
+  mySimpit.init(); 
 
   mySimpit.inboundHandler(messageHandler); // callback function
   
@@ -76,11 +78,20 @@ void loop() {
   
   mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
 
+  // Check for interrup
   if (digitalRead(io_int_pin) == LOW) {
-      
+      // check for button presses    
+      button_check(7);
+        
   }
-  int throttle_val =  map(adc.readADC(0), 0, 1023, 0, 255);
-  Joystick.setZAxis(throttle_val);
+  
+  // Read and send all axis
+  for (int i = 0; i < 8; i++) {
+    axis_input(i);
+  }
+  
+  
+  
 
                        
 
