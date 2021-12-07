@@ -16,7 +16,7 @@ bool last_button_state[32] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 int last_axis_val[8] = {0, 0, 0, 0, 0, 0, 0, 0}; 
 
 
-void axis_input(uint8_t axis) {
+void axis_input(int axis) {
     int value = adc.readADC(axis);
     if (value != last_axis_val[axis]) {
         last_axis_val[axis] = value;
@@ -41,11 +41,11 @@ void axis_input(uint8_t axis) {
     }
 }
 
-void  button_check(uint8_t button) {
-    uint8_t index = button - 1;
-    bool state = digitalRead(index);
+void  button_check(int button) {
+    int index = button - 1;
+    bool state = io.digitalRead(index);
     if (state != last_button_state[index]) {
         last_button_state[index] = state;
-        Joystick.setButton(1, !state);   
+        Joystick.setButton(index, !state);   
     }
 }
