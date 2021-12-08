@@ -17,11 +17,11 @@ Adafruit_MCP23X17 io;
 
 // Create the Joystick
 Joystick_ Joystick(0x05,0x04,
-  1, 0,                  // Button Count, Hat Switch Count
-  false, false, false,     // X and Y and Z Axis
-  true, true, true,   // No Rx, Ry, or Rz
-  false, false,          // No rudder or throttle
-  false, false, false);  // No accelerator, brake, or steering
+  1, 0,                    //  Button Count, Hat Switch Count
+  false, false, false,     //  X and Y and Z Axis
+  true, true, true,        //  Rx, Ry, or Rz
+  false, false,            //  rudder or throttle
+  false, false, false);    //  accelerator, brake, or steering
 
 #define io_int_pin 8
 
@@ -60,7 +60,9 @@ void setup() {
   
   
   Serial.begin(115200); // Initialize Serial connection to mod
-  mySimpit.init(); 
+  while (!mySimpit.init()) {
+    delay(100);
+  }
 
   mySimpit.inboundHandler(messageHandler); // callback function
   

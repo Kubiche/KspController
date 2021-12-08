@@ -14,10 +14,10 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         // Convert the message we received to an Resource struct.
         mySStageFuel = parseResource(msg);
         if (mySStageFuel.available == 0){
-          show_in_bar_1(0);
+          show_in_bar_4(0);
         }
         else {
-        show_in_bar_1(map(mySStageFuel.available, 0, mySStageFuel.total, 1, 10));
+        show_in_bar_4(map(mySStageFuel.available, 0, mySStageFuel.total, 1, 10));
         }      
       }
     break;
@@ -26,10 +26,10 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         resourceMessage myLStageFuel;
         myLStageFuel = parseResource(msg);
         if (myLStageFuel.available == 0){
-          show_in_bar_2(0);
+          show_in_bar_3(0);
         }
         else {
-          show_in_bar_2(map(myLStageFuel.available, 0, myLStageFuel.total, 1, 10));
+          show_in_bar_3(map(myLStageFuel.available, 0, myLStageFuel.total, 1, 10));
         }
       }
     break;
@@ -38,10 +38,10 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         resourceMessage myMonoFuel;
         myMonoFuel = parseResource(msg);
         if (myMonoFuel.available == 0){
-          show_in_bar_3(0);
+          show_in_bar_2(0);
         }
         else {
-          show_in_bar_3(map(myMonoFuel.available, 0, myMonoFuel.total, 1, 10));
+          show_in_bar_2(map(myMonoFuel.available, 0, myMonoFuel.total, 1, 10));
         }
       }
     break;
@@ -50,10 +50,10 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         resourceMessage myBatteryLevel;
         myBatteryLevel = parseResource(msg);
         if (myBatteryLevel.available == 0){
-          show_in_bar_4(0);
+          show_in_bar_1(0);
         }
         else {        
-        show_in_bar_4(map(myBatteryLevel.available, 0, myBatteryLevel.total, 1, 10));
+        show_in_bar_1(map(myBatteryLevel.available, 0, myBatteryLevel.total, 1, 10));
         }
       }
     break;
@@ -62,10 +62,10 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         resourceMessage mySFuel;
         mySFuel = parseResource(msg);
         if (mySFuel.available == 0){
-          show_in_bar_1(0);
+          show_in_bar_4(0);
         }
         else {
-          show_in_bar_1(map(mySFuel.available, 0, mySFuel.total, 1, 10));
+          show_in_bar_4(map(mySFuel.available, 0, mySFuel.total, 1, 10));
         }
       }
     break;  
