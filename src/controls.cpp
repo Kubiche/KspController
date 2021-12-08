@@ -33,8 +33,8 @@ void axis_input(uint8_t axis) {
     
 }
 
-void  button_check(uint8_t button) {
+uint8_t button_check(uint8_t button) {
     uint8_t _button = button - 1;
     uint8_t _value = io.digitalRead(_button);
-    Joystick.setButton(_button, _value);
+    return _value;    
     }

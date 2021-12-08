@@ -5,5 +5,5 @@
 
 void read_Right_Analog_Stick();
 
-void button_check(int button);
-void axis_input(int axis); 
+uint8_t button_check(uint8_t button);
+void axis_input(uint8_t axis); 

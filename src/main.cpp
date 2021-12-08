@@ -83,7 +83,9 @@ void loop() {
   // Check for interrup
   if (digitalRead(io_int_pin) == LOW) {
       // check for button presses    
-      button_check(7);        
+      for (uint8_t i = 0 ; i < 16; i++) {
+        Joystick.setButton(i, !button_check(i));
+      }        
   }
 
   if (digitalRead(4) == LOW) {
@@ -95,7 +97,7 @@ void loop() {
   }
   
   // Read and send all axis
-  for (int i = 0; i < 8; i++) {
+  for (uint8_t i = 0; i < 8; i++) {
     axis_input(i);
   }
   
