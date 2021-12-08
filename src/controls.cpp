@@ -17,7 +17,7 @@ int last_axis_val[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 
 void axis_input(int axis) {
-    int value = adc.readADC(axis);
+    int value = map(adc.readADC(axis),0,1023,0,255);
     if (value != last_axis_val[axis]) {
         last_axis_val[axis] = value;
         switch (axis) {

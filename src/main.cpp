@@ -31,6 +31,10 @@ void setup() {
 
   // Initialize Joystick Library
 	Joystick.begin();
+  Joystick.setRxAxisRange(0,255);
+  Joystick.setRyAxisRange(0,255);
+  Joystick.setRzAxisRange(0,255);
+  
   
   
   //Led driver MAX7219  
