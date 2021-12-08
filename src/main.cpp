@@ -30,7 +30,7 @@ void setup() {
   SPI.begin();
 
   // Initialize Joystick Library
-	Joystick.begin();
+	Joystick.begin(false);
   
   
   //Led driver MAX7219  
@@ -81,8 +81,15 @@ void loop() {
   // Check for interrup
   if (digitalRead(io_int_pin) == LOW) {
       // check for button presses    
-      button_check(7);
-        
+      button_check(7);        
+  }
+
+  if (digitalRead(4) == LOW) {
+    Joystick.setButton(1, HIGH);
+  }
+  else {
+    Joystick.setButton(1, LOW);
+
   }
   
   // Read and send all axis
@@ -93,6 +100,6 @@ void loop() {
   
   
 
-                       
-
+   //send HID commands to computer.                     
+  Joystick.sendState();
 }

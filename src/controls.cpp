@@ -7,20 +7,12 @@
 extern KerbalSimpit mySimpit;
 extern Joystick_ Joystick;
 extern Adafruit_MCP23X17 io;
-extern Adafruit_MCP3008 adc;
-
-
-bool last_button_state[32] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-
-//storage array to keep the last value read from the adc
-int last_axis_val[8] = {0, 0, 0, 0, 0, 0, 0, 0}; 
+extern Adafruit_MCP3008 adc; 
 
 
 void axis_input(uint8_t axis) {
     int value = adc.readADC(axis);
-    if (value != last_axis_val[axis]) {
-        last_axis_val[axis] = value;
-        switch (axis) {
+    switch (axis) {
         case 0:
         //RX Axis
         Joystick.setRxAxis(value);
@@ -36,16 +28,13 @@ void axis_input(uint8_t axis) {
         case 7:
         //Throttle Axis
         Joystick.setThrottle(value);
-        break;
-        }
+        break;        
     }
+    
 }
 
 void  button_check(uint8_t button) {
-    uint8_t index = button - 1;
-    bool state = digitalRead(index);
-    if (state != last_button_state[index]) {
-        last_button_state[index] = state;
-        Joystick.setButton(1, !state);   
+    uint8_t _button = button - 1;
+    uint8_t _value = io.digitalRead(_button);
+    Joystick.setButton(_button, _value);
     }
-}
