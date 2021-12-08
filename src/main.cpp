@@ -60,8 +60,9 @@ void setup() {
   
   
   Serial.begin(115200); // Initialize Serial connection to mod
-  //while (!mySimpit.init()) {
-  //}
+  while (!mySimpit.init()) {
+    delay(100);
+  }
 
   mySimpit.inboundHandler(messageHandler); // callback function
   

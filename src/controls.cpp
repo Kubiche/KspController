@@ -10,7 +10,7 @@ extern Adafruit_MCP23X17 io;
 extern Adafruit_MCP3008 adc;
 
 
-bool last_button_state[32] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+bool last_button_state[16] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
 //storage array to keep the last value read from the adc
 int last_axis_val[8] = {0, 0, 0, 0, 0, 0, 0, 0}; 
@@ -46,6 +46,6 @@ void  button_check(int button) {
     bool state = io.digitalRead(index);
     if (state != last_button_state[index]) {
         last_button_state[index] = state;
-        Joystick.setButton(index, !state);   
+        Joystick.setButton(index, (!state));   
     }
 }
