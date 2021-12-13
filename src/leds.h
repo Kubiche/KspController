@@ -1,7 +1,7 @@
 #pragma once
 
 // The Slave Selecte pin for the led controller
-#define LED_CS 10
+#define LED_CS 7
 
 //the opcodes for the MAX7221 and MAX7219
 #define OP_NOOP   0x00

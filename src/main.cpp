@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <KerbalSimpit.h>
 #include <Adafruit_MCP23X17.h>
-#include <Adafruit_MCP3008.h>
+//#include <Adafruit_MCP3008.h>
 #include <Joystick.h>
 #include <HID.h>
 #include "inboundMessages.h"
@@ -11,9 +11,13 @@
 
 KerbalSimpit mySimpit(Serial);
 
-Adafruit_MCP3008 adc;
+//Adafruit_MCP3008 adc;
 
 Adafruit_MCP23X17 io;
+
+unsigned long axis_last_update = 0;
+
+int axis_check_interval = 100;
 
 // Create the Joystick
 Joystick_ Joystick(0x05,0x04,
@@ -23,7 +27,6 @@ Joystick_ Joystick(0x05,0x04,
   false, false,            //  rudder or throttle
   false, false, false);    //  accelerator, brake, or steering
 
-#define io_int_pin 8
 
 void setup() {
 
@@ -47,7 +50,7 @@ void setup() {
   
 
   //ADC MCP3008
-  adc.begin(9);
+  //adc.begin(9);
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
 
@@ -86,22 +89,20 @@ void loop() {
       for (uint8_t i = 0 ; i < 16; i++) {
         Joystick.setButton(i, !button_check(i));
       }        
-  }
-
-  if (digitalRead(4) == LOW) {
-    Joystick.setButton(1, HIGH);
-  }
-  else {
-    Joystick.setButton(1, LOW);
-
-  }
+  } 
   
   // Read and send all axis
-  for (uint8_t i = 0; i < 8; i++) {
-    axis_input(i);
+  //if (millis() - axis_last_update > axis_check_interval) {
+  //  axis_last_update = millis();
+  //  for (uint8_t i = 0; i < 8; i++) {
+  //    axis_input(i);
+  //  }
+  //} 
+  if (millis() - axis_last_update > axis_check_interval) {
+  Joystick.setRxAxis(analogRead(A0));
+  Joystick.setRyAxis(analogRead(A1));
+  Joystick.setRzAxis(analogRead(A2));
   }
-  
-  
   
 
    //send HID commands to computer.                     

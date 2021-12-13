@@ -1,6 +1,7 @@
 #pragma once
 
 #define throttlePin A0;
+#define io_int_pin 8
 
 
 void read_Right_Analog_Stick();
