@@ -1,7 +1,6 @@
 #include "controls.h"
 
 extern KerbalSimpit mySimpit;
-extern Joystick_ Joystick;
 extern Adafruit_MCP23X17 io;
 
 bool button_check(uint8_t button) {
