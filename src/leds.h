@@ -1,5 +1,7 @@
 #pragma once
 
+#include <spi.h>
+
 
 
 // The Slave Selecte pin for the led controller
@@ -24,7 +26,7 @@
 
 
 //functions to control led rows at a time
-void setLedReg(uint8_t opcode, byte val);
+void setLedReg(uint8_t opcode, uint8_t val);
 
 //Funtion for individual led toggling
 void setLed(uint8_t dig, uint8_t seg, bool state);

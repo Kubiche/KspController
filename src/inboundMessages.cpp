@@ -1,10 +1,8 @@
-#include <inboundMessages.h>
-#include <Arduino.h>
-#include <KerbalSimpit.h>
-#include "leds.h"
+#include "inboundMessages.h"
+
 
 // Message handler required by simpit.
-void messageHandler(byte messageType, byte msg[], byte msgSize) {
+void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
   switch(messageType) {
   case SF_STAGE_MESSAGE: //Current stage solid fuel
       // Checking if the message is the size we expect is a very basic
