@@ -44,7 +44,7 @@ void setup() {
   setLedReg(OP_INTENSITY, 2); // Set intensity to 2 of 16
   //clear the display
   for (int i=8; i>0; i--){
-    setLedReg(i, 0);
+    setLedReg(i, 255);
   }  
   
   
@@ -61,11 +61,12 @@ void setup() {
     io.pinMode(i, INPUT_PULLUP); //set up all the pins as input and pull them high
   }
   
-  
+  /*
   Serial.begin(115200); // Initialize Serial connection to mod
   while (!mySimpit.init()) {
     delay(100);
   }
+  */
 
   mySimpit.inboundHandler(messageHandler); // callback function
   
@@ -98,7 +99,7 @@ void loop() {
   //    axis_input(i);
   //  }
   //} 
-  if (millis() - axis_last_update > axis_check_interval) {
+  //if (millis() - axis_last_update > axis_check_interval) {
   Joystick.setRxAxis(analogRead(A0));
   Joystick.setRyAxis(analogRead(A1));
   Joystick.setRzAxis(analogRead(A2));
