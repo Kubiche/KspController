@@ -1,4 +1,7 @@
 #include <inboundMessages.h>
+#include <Arduino.h>
+#include <KerbalSimpit.h>
+#include "leds.h"
 
 // Message handler required by simpit.
 void messageHandler(byte messageType, byte msg[], byte msgSize) {

@@ -1,7 +1,6 @@
 #pragma once
 
-#include <spi.h>
-#include "leds.h"
+
 
 // The Slave Selecte pin for the led controller
 #define LED_CS 7

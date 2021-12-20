@@ -1,4 +1,8 @@
 #include <controls.h>
+#include <Arduino.h>
+#include <KerbalSimpit.h>
+#include <Adafruit_MCP23X17.h>
+#include <Joystick.h>
 
 extern KerbalSimpit mySimpit;
 extern Joystick_ Joystick;

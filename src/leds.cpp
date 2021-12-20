@@ -1,4 +1,6 @@
-#include <leds.h>
+#include "leds.h"
+#include <spi.h>
+
 
 
 byte digit[8] {0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}; //array to store the max7219 digit values to be used by the leds
