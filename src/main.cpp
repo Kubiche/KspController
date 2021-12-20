@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <KerbalSimpit.h>
 #include <Adafruit_MCP23X17.h>
-//#include <Adafruit_MCP3008.h>
 #include <Joystick.h>
 #include <HID.h>
 #include "inboundMessages.h"
@@ -45,12 +44,7 @@ void setup() {
   //clear the display
   for (int i=8; i>0; i--){
     setLedReg(i, 255);
-  }  
-  
-  
-
-  //ADC MCP3008
-  //adc.begin(9);
+  }   
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
 
@@ -90,19 +84,8 @@ void loop() {
       for (uint8_t i = 0 ; i < 16; i++) {
         Joystick.setButton(i, !button_check(i));
       }        
-  } 
-  
-  // Read and send all axis
-  //if (millis() - axis_last_update > axis_check_interval) {
-  //  axis_last_update = millis();
-  //  for (uint8_t i = 0; i < 8; i++) {
-  //    axis_input(i);
-  //  }
-  //} 
-  //if (millis() - axis_last_update > axis_check_interval) {
+  }  
   Joystick.setRxAxis(analogRead(A0));
   Joystick.setRyAxis(analogRead(A1));
-  Joystick.setRzAxis(analogRead(A2));
-  }
-    
+  Joystick.setRzAxis(analogRead(A2));    
 }
