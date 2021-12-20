@@ -33,7 +33,7 @@ void setup() {
   SPI.begin();
 
   // Initialize Joystick Library
-	Joystick.begin(false);
+	Joystick.begin();
   
   
   //Led driver MAX7219  
@@ -103,8 +103,5 @@ void loop() {
   Joystick.setRyAxis(analogRead(A1));
   Joystick.setRzAxis(analogRead(A2));
   }
-  
-
-   //send HID commands to computer.                     
-  Joystick.sendState();
+    
 }
