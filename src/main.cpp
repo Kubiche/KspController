@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <KerbalSimpit.h>
-#include <Adafruit_MCP23X17.h>
 #include <Joystick.h>
 #include <HID.h>
 #include "inboundMessages.h"
@@ -9,10 +8,6 @@
 
 
 KerbalSimpit mySimpit(Serial);
-
-//Adafruit_MCP3008 adc;
-
-Adafruit_MCP23X17 io;
 
 unsigned long axis_last_update = 0;
 
@@ -47,13 +42,6 @@ void setup() {
   }   
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
-
-  //IO expander MCP23017
-  io.begin_I2C(0x21);
-  io.setupInterrupts(true, false, LOW); //sets up interrupts to be mirrored, be pulled high and to pull the pin low if interrupt occurs.
-  for (int i = 0 ; i < 16; i++){  
-    io.pinMode(i, INPUT_PULLUP); //set up all the pins as input and pull them high
-  }
   
   /*
   Serial.begin(115200); // Initialize Serial connection to mod
@@ -78,13 +66,7 @@ void loop() {
   
   mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
 
-  // Check for interrup
-  if (digitalRead(io_int_pin) == LOW) {
-      // check for button presses    
-      for (uint8_t i = 0 ; i < 16; i++) {
-        Joystick.setButton(i, !button_check(i));
-      }        
-  }  
+   
   Joystick.setRxAxis(analogRead(A0));
   Joystick.setRyAxis(analogRead(A1));
   Joystick.setRzAxis(analogRead(A2));    
