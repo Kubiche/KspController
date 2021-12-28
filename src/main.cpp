@@ -7,11 +7,12 @@
 #include "controls.h"
 
 
+
 KerbalSimpit mySimpit(Serial);
 
 unsigned long axis_last_update = 0;
 
-int axis_check_interval = 100;
+unsigned long axis_check_interval = 100;
 
 // Create the Joystick
 Joystick_ Joystick(0x05,0x04,
@@ -43,9 +44,9 @@ void setup() {
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
   
-  /*
+  
   Serial.begin(115200); // Initialize Serial connection to mod
-  while (!mySimpit.init()) {
+  /*while (!mySimpit.init()) {
     delay(100);
   }
   */
@@ -65,9 +66,19 @@ void setup() {
 void loop() {  
   
   mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
+  
 
-   
-  Joystick.setRxAxis(analogRead(A0));
-  Joystick.setRyAxis(analogRead(A1));
-  Joystick.setRzAxis(analogRead(A2));    
+  if ((millis() - axis_last_update) > axis_check_interval) {    
+    int readValue = analogRead(A0);
+    Joystick.setRxAxis(readValue);
+    Serial.println(readValue);
+    readValue = analogRead(A1);
+    Joystick.setRyAxis(readValue);
+    Serial.println(readValue);
+    readValue = analogRead(A2);
+    Joystick.setRzAxis(readValue);
+    Serial.println(readValue);
+    axis_last_update = millis();
+  }
+      
 }
