@@ -2,11 +2,14 @@
 #include <KerbalSimpit.h>
 #include <Joystick.h>
 #include <HID.h>
+#include <Wire.h>
 #include "inboundMessages.h"
 #include "leds.h"
 #include "controls.h"
+#include "MCP23017.h"
 
 
+MCP23017 io1;
 
 KerbalSimpit mySimpit(Serial);
 
@@ -24,8 +27,9 @@ Joystick_ Joystick(0x05,0x04,
 
 
 void setup() {
-
-  SPI.begin();
+  
+  Wire.begin(); // set up I2c bus
+  SPI.begin(); // set up SPI bus
 
   // Initialize Joystick Library
 	Joystick.begin();
@@ -41,6 +45,12 @@ void setup() {
   for (int i=8; i>0; i--){
     setLedReg(i, 255);
   }   
+
+  // MCP23017 IO expanders
+  io1.init(0x21);
+  
+
+
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
   
