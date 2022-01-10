@@ -31,7 +31,7 @@ uint8_t MCP23017::readGPIO(uint8_t _gpio){
     Wire.beginTransmission(_deviceAddress);
     Wire.write(_gpio);
     Wire.endTransmission();
-    Wire.requestFrom(_deviceAddress, 1, false);
+    Wire.requestFrom(_deviceAddress, 1);
     return Wire.read();
     
 }
