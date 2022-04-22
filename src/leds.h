@@ -1,7 +1,11 @@
 #pragma once
 
+#include <spi.h>
+
+
+
 // The Slave Selecte pin for the led controller
-#define LED_CS 10
+#define LED_CS 7
 
 //the opcodes for the MAX7221 and MAX7219
 #define OP_NOOP   0x00
@@ -22,7 +26,7 @@
 
 
 //functions to control led rows at a time
-void setLedReg(uint8_t opcode, byte val);
+void setLedReg(uint8_t opcode, uint8_t val);
 
 //Funtion for individual led toggling
 void setLed(uint8_t dig, uint8_t seg, bool state);

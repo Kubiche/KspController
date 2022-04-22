@@ -1,6 +1,7 @@
 #pragma once
 
-#define throttlePin A0;
+#include <KerbalSimpit.h>
 
 
-void read_Right_Analog_Stick();
+
+ 

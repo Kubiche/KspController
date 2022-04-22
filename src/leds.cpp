@@ -1,11 +1,12 @@
-#include <spi.h>
 #include "leds.h"
 
 
-byte digit[8] {0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}; //array to store the max7219 digit values to be used by the leds
 
-void setLedReg(uint8_t opcode, byte val) {
-  byte led_buffer[2];
+
+uint8_t digit[8] {0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}; //array to store the max7219 digit values to be used by the leds
+
+void setLedReg(uint8_t opcode, uint8_t val) {
+  uint8_t led_buffer[2];
   led_buffer[0] = opcode;
   led_buffer[1] = val; 
   SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
@@ -25,12 +26,12 @@ void setLed(uint8_t dig, uint8_t seg, bool state){
 }
 
 // arrays to store mask for bit manupulation depending on the led bar
-byte bar1Mask[2] {0b00000000, 0b00111111};
-byte bar2Mask[2] {0b11000000, 0b00001111};
-byte bar3Mask[2] {0b11110000, 0b00000011};
-byte bar4Mask[2] {0b11111100, 0b00000000};
+uint8_t bar1Mask[2] {0b00000000, 0b00111111};
+uint8_t bar2Mask[2] {0b11000000, 0b00001111};
+uint8_t bar3Mask[2] {0b11110000, 0b00000011};
+uint8_t bar4Mask[2] {0b11111100, 0b00000000};
 
-// These functions apply a mask to the byte controlling the lower and upper part of each led bar and set a value on it leaving ones for other bars alone
+// These functions apply a mask to the uint8_t controlling the lower and upper part of each led bar and set a value on it leaving ones for other bars alone
 void show_in_bar_1(int value){
     switch (value){          
           case 1:            

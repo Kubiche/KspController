@@ -1,4 +1,9 @@
 #pragma once
 
+#include <KerbalSimpit.h>
+#include "leds.h"
 
-void messageHandler(byte messageType, byte msg[], byte msgSize); // Message handler required by simpit
+
+
+
+void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize); // Message handler required by simpit
