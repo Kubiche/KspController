@@ -8,6 +8,17 @@
 #include "controls.h"
 #include "MCP23017.h"
 
+#define DEBUG 1
+
+#if DEBUG == 1
+#define debug(x) Serial.print(x)
+#define debugln(x) Serial.println(x)
+#else
+#define debug(x)
+#define debugln(x)
+#endif
+
+
 
 MCP23017 io1;
 
@@ -81,13 +92,13 @@ void loop() {
   if ((millis() - axis_last_update) > axis_check_interval) {    
     int readValue = analogRead(A0);
     Joystick.setRxAxis(readValue);
-    Serial.println(readValue);
+    debugln(readValue);
     readValue = analogRead(A1);
     Joystick.setRyAxis(readValue);
-    Serial.println(readValue);
+    debugln(readValue);
     readValue = analogRead(A2);
     Joystick.setRzAxis(readValue);
-    Serial.println(readValue);
+    debugln(readValue);
     axis_last_update = millis();
   }
       
