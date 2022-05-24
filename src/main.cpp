@@ -5,10 +5,9 @@
 #include <Wire.h>
 #include "inboundMessages.h"
 #include "leds.h"
-#include "controls.h"
 #include "MCP23017.h"
 
-#define DEBUG 1
+#define DEBUG 0
 
 #if DEBUG == 1
 #define debug(x) Serial.print(x)
@@ -18,15 +17,17 @@
 #define debugln(x)
 #endif
 
+#define analog_check_interval 5
 
+void readAnalogs(); //function to read the analog inputs for the controller
+
+unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
 
 MCP23017 io1;
 
 KerbalSimpit mySimpit(Serial);
 
-unsigned long axis_last_update = 0;
 
-unsigned long axis_check_interval = 5;
 
 // Create the Joystick
 Joystick_ Joystick(0x05,0x04,
@@ -37,7 +38,8 @@ Joystick_ Joystick(0x05,0x04,
   false, false, false);    //  accelerator, brake, or steering
 
 
-void setup() {
+void setup() 
+{
   
   Wire.begin(); // set up I2c bus
   SPI.begin(); // set up SPI bus
@@ -52,8 +54,10 @@ void setup() {
   setLedReg(OP_SHUTDOWN, 1); // Turn LED controller on
   setLedReg(OP_SCANLIMIT, 7); // set to scan all digits
   setLedReg(OP_INTENSITY, 2); // Set intensity to 2 of 16
+  
   //clear the display
-  for (int i=8; i>0; i--){
+  for (int i=8; i>0; i--)
+  {
     setLedReg(i, 255);
   }   
 
@@ -84,12 +88,23 @@ void setup() {
   
 }
 
-void loop() {  
+void loop() 
+{  
   
   mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
+  readAnalogs();
+  Joystick.sendState(); //Send joustick updated states to the PC 
   
+      
+}
 
-  if ((millis() - axis_last_update) > axis_check_interval) {    
+
+
+void readAnalogs() //read and analog values and update accordingly.
+{
+  
+  if ((millis() - analog_last_read) > analog_check_interval)
+  {    
     int readValue = analogRead(A0);
     Joystick.setRxAxis(readValue);
     debug("RX: ");
@@ -106,9 +121,8 @@ void loop() {
     debug(readValue);
     debug(" ");
     debug("Time: ");
-    debugln(millis() - axis_last_update);
-    Joystick.sendState();
-    axis_last_update = millis();    
+    debugln(millis() - analog_last_read);    
+    analog_last_read = millis();    
   }
-      
+
 }

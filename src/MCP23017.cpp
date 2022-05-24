@@ -1,7 +1,8 @@
 #include "MCP23017.h"
 #include <Wire.h>
 
-void MCP23017::init(int I2CAddress){
+void MCP23017::init(int I2CAddress)
+{
     _deviceAddress = I2CAddress;
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IOCON);
@@ -27,7 +28,8 @@ void MCP23017::init(int I2CAddress){
     Wire.endTransmission();
 }
 
-uint8_t MCP23017::readGPIO(uint8_t _gpio){
+uint8_t MCP23017::readGPIO(uint8_t _gpio)
+{
     Wire.beginTransmission(_deviceAddress);
     Wire.write(_gpio);
     Wire.endTransmission();

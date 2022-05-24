@@ -20,7 +20,8 @@
 
 
 
-class MCP23017 {
+class MCP23017 
+{
 public:
     void init(int I2CAddress);    
     uint8_t readGPIO(uint8_t _gpio);    
