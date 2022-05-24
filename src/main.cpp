@@ -43,7 +43,7 @@ void setup() {
   SPI.begin(); // set up SPI bus
 
   // Initialize Joystick Library
-	Joystick.begin();
+	Joystick.begin(false);
   
   
   //Led driver MAX7219  
@@ -92,14 +92,23 @@ void loop() {
   if ((millis() - axis_last_update) > axis_check_interval) {    
     int readValue = analogRead(A0);
     Joystick.setRxAxis(readValue);
-    debugln(readValue);
+    debug("RX: ");
+    debug(readValue);
+    debug(" ");
     readValue = analogRead(A1);
     Joystick.setRyAxis(readValue);
-    debugln(readValue);
+    debug("RY: ");
+    debug(readValue);
+    debug(" ");
     readValue = analogRead(A2);
     Joystick.setRzAxis(readValue);
-    debugln(readValue);
-    axis_last_update = millis();
+    debug("RZ: ");
+    debug(readValue);
+    debug(" ");
+    debug("Time: ");
+    debugln(millis() - axis_last_update);
+    Joystick.sendState();
+    axis_last_update = millis();    
   }
       
 }
