@@ -26,7 +26,7 @@ KerbalSimpit mySimpit(Serial);
 
 unsigned long axis_last_update = 0;
 
-unsigned long axis_check_interval = 100;
+unsigned long axis_check_interval = 5;
 
 // Create the Joystick
 Joystick_ Joystick(0x05,0x04,
