@@ -72,10 +72,11 @@ void setup()
   
   
   Serial.begin(115200); // Initialize Serial connection to mod
-  /*while (!mySimpit.init()) {
+  while (!mySimpit.init()) 
+  {
     delay(100);
   }
-  */
+  
 
   mySimpit.inboundHandler(messageHandler); // callback function
   
@@ -97,6 +98,7 @@ void loop()
   if ((millis() - analog_last_read) > analog_check_interval)
   {
     readAnalogs();
+    analog_last_read = millis();
     Joystick.sendState(); //Send joystick updated states to the PC
   }
    
@@ -107,23 +109,9 @@ void loop()
 // FUNCTION DEFINITIONS
 
 void readAnalogs() //read analog values and update accordingly.
-{
-  int readValue = analogRead(A0);
-  Joystick.setRxAxis(readValue);
-  debug("RX: ");
-  debug(readValue);
-  debug(" ");
-  readValue = analogRead(A1);
-  Joystick.setRyAxis(readValue);
-  debug("RY: ");
-  debug(readValue);
-  debug(" ");
-  readValue = analogRead(A2);
-  Joystick.setRzAxis(readValue);
-  debug("RZ: ");
-  debug(readValue);
-  debug(" ");
-  debug("Time: ");
-  debugln(millis() - analog_last_read);    
-  analog_last_read = millis();  
+{  
+  Joystick.setRxAxis(analogRead(A0));  
+  Joystick.setRyAxis(analogRead(A1));
+  Joystick.setRzAxis(analogRead(A2));       
+    
 }
