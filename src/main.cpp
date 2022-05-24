@@ -17,8 +17,9 @@
 #define debugln(x)
 #endif
 
-#define analog_check_interval 5
+#define analog_check_interval 5 // Analog read interval to prevent USB saturation.
 
+// FUNCTION DECLARATIONS
 void readAnalogs(); //function to read the analog inputs for the controller
 
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
@@ -92,37 +93,37 @@ void loop()
 {  
   
   mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
-  readAnalogs();
-  Joystick.sendState(); //Send joustick updated states to the PC 
+  
+  if ((millis() - analog_last_read) > analog_check_interval)
+  {
+    readAnalogs();
+    Joystick.sendState(); //Send joystick updated states to the PC
+  }
+   
   
       
 }
 
+// FUNCTION DEFINITIONS
 
-
-void readAnalogs() //read and analog values and update accordingly.
+void readAnalogs() //read analog values and update accordingly.
 {
-  
-  if ((millis() - analog_last_read) > analog_check_interval)
-  {    
-    int readValue = analogRead(A0);
-    Joystick.setRxAxis(readValue);
-    debug("RX: ");
-    debug(readValue);
-    debug(" ");
-    readValue = analogRead(A1);
-    Joystick.setRyAxis(readValue);
-    debug("RY: ");
-    debug(readValue);
-    debug(" ");
-    readValue = analogRead(A2);
-    Joystick.setRzAxis(readValue);
-    debug("RZ: ");
-    debug(readValue);
-    debug(" ");
-    debug("Time: ");
-    debugln(millis() - analog_last_read);    
-    analog_last_read = millis();    
-  }
-
+  int readValue = analogRead(A0);
+  Joystick.setRxAxis(readValue);
+  debug("RX: ");
+  debug(readValue);
+  debug(" ");
+  readValue = analogRead(A1);
+  Joystick.setRyAxis(readValue);
+  debug("RY: ");
+  debug(readValue);
+  debug(" ");
+  readValue = analogRead(A2);
+  Joystick.setRzAxis(readValue);
+  debug("RZ: ");
+  debug(readValue);
+  debug(" ");
+  debug("Time: ");
+  debugln(millis() - analog_last_read);    
+  analog_last_read = millis();  
 }
