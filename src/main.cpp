@@ -113,8 +113,8 @@ void readAnalogs() //read analog values and update accordingly.
   Joystick.setRxAxis(analogRead(A0));  
   Joystick.setRyAxis(analogRead(A1));
   Joystick.setRzAxis(analogRead(A2));
-  Joystick.setXAxis(analogRead(A8));
-  Joystick.setYAxis(analogRead(A9));
-  Joystick.setZAxis(analogRead(A10));
-  Joystick.setThrottle(analogRead(A6));    
+  //Joystick.setXAxis(analogRead(A8));
+  //Joystick.setYAxis(analogRead(A9));
+  //Joystick.setZAxis(analogRead(A10));
+  //Joystick.setThrottle(analogRead(A6));    
 }
