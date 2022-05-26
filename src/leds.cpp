@@ -28,10 +28,10 @@ void setLed(uint8_t dig, uint8_t seg, bool state)
 }
 
 // arrays to store mask for bit manupulation depending on the led bar
-uint8_t bar1Mask[2] {0b00000000, 0b00111111};
-uint8_t bar2Mask[2] {0b11000000, 0b00001111};
-uint8_t bar3Mask[2] {0b11110000, 0b00000011};
-uint8_t bar4Mask[2] {0b11111100, 0b00000000};
+static const uint8_t bar1Mask[2] {0b00000000, 0b00111111};
+static const uint8_t bar2Mask[2] {0b11000000, 0b00001111};
+static const uint8_t bar3Mask[2] {0b11110000, 0b00000011};
+static const uint8_t bar4Mask[2] {0b11111100, 0b00000000};
 
 // These functions apply a mask to the uint8_t controlling the lower and upper part of each led bar and set a value on it leaving ones for other bars alone
 void show_in_bar_1(int value)
