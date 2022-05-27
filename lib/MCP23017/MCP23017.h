@@ -23,10 +23,10 @@
 class MCP23017 
 {
 public:
-    void init(uint8_t I2CAddress);    
+    void init(int I2CAddress);    
     uint8_t readGPIO(uint8_t _gpio);    
     
 private:
-    uint8_t _deviceAddress;
+    int _deviceAddress;
     
 };
