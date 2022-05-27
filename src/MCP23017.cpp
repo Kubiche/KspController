@@ -1,7 +1,7 @@
 #include "MCP23017.h"
 #include <Wire.h>
 
-void MCP23017::init(int I2CAddress)
+void MCP23017::init(uint8_t I2CAddress)
 {
     _deviceAddress = I2CAddress;
     Wire.beginTransmission(_deviceAddress);

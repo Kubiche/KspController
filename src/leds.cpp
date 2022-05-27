@@ -33,8 +33,8 @@ static const uint8_t bar2Mask[2] {0b11000000, 0b00001111};
 static const uint8_t bar3Mask[2] {0b11110000, 0b00000011};
 static const uint8_t bar4Mask[2] {0b11111100, 0b00000000};
 
-// These functions apply a mask to the uint8_t controlling the lower and upper part of each led bar and set a value on it leaving ones for other bars alone
-void show_in_bar_1(int value)
+// These functions apply a mask to the byte/digit controlling the lower and upper part of each led bar and set a value on it leaving the ones for other bars alone
+void show_in_bar_1(uint8_t value)
 {
   switch (value)
   {          
@@ -109,7 +109,7 @@ void show_in_bar_1(int value)
   }
 }
 
-void show_in_bar_2(int value)
+void show_in_bar_2(uint8_t value)
 {
     switch (value)
     {        
@@ -196,7 +196,7 @@ void show_in_bar_2(int value)
         }
 }
 
-void show_in_bar_3(int value){
+void show_in_bar_3(uint8_t value){
     switch (value){            
             case 1:            
             digit[2] &= bar3Mask[0];
@@ -285,7 +285,7 @@ void show_in_bar_3(int value){
 
 }
 
-void show_in_bar_4(int value){
+void show_in_bar_4(uint8_t value){
     switch (value){
           case 1:            
             digit[3] &= bar4Mask[0];

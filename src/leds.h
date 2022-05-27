@@ -32,7 +32,7 @@ void setLedReg(uint8_t opcode, uint8_t val);
 void setLed(uint8_t dig, uint8_t seg, bool state);
 
 // functions to diplay mapped values into 10 segment led bars
-void show_in_bar_1(int value);
-void show_in_bar_2(int value);
-void show_in_bar_3(int value);
-void show_in_bar_4(int value);
+void show_in_bar_1(uint8_t value);
+void show_in_bar_2(uint8_t value);
+void show_in_bar_3(uint8_t value);
+void show_in_bar_4(uint8_t value);
