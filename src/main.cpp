@@ -32,7 +32,7 @@ void setup()
   Wire.begin(); // set up I2c bus
   SPI.begin(); // set up SPI bus
 
-  // Initialize Joystick Library
+  // Set the joystick to manual update to prevent USB overflow
 	Joystick.begin(false);
   
   
@@ -46,7 +46,7 @@ void setup()
   //clear the display
   for (int i=8; i>0; i--)
   {
-    setLedReg(i, 255);
+    setLedReg(i, 0);
   }   
 
   // MCP23017 IO expanders
@@ -80,7 +80,7 @@ void setup()
 void loop() 
 {  
   
-  mySimpit.update(); // Update messages from simpit, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
+  mySimpit.update(); // Update messages from simpit mod, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
   updateAnalogs();
   
       
