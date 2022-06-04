@@ -4,9 +4,9 @@
 #include <HID.h>
 #include <Wire.h>
 #include "inboundMessages.h"
-#include "leds.h"
-#include "MCP23017.h"
-#include "analogs.h"
+#include <leds.h>
+#include <MCP23017.h>
+#include "Inputs.h"
 
 #define DEBUG 0
 

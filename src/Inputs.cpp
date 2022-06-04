@@ -1,4 +1,4 @@
-#include "analogs.h"
+#include "Inputs.h"
 
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
 
