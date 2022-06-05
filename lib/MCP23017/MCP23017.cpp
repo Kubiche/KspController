@@ -6,7 +6,7 @@ void MCP23017::init(int I2CAddress)
     _deviceAddress = I2CAddress;
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IOCON);
-    Wire.write(0b11111100);
+    Wire.write(0b11111010);
     Wire.endTransmission(false);
     Wire.write(MCP23017_IODIRA);
     Wire.write(0xFF);
