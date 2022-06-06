@@ -21,9 +21,21 @@ void MCP23017::init(int I2CAddress)
     Wire.write(0xFF);
     Wire.endTransmission(false);
     Wire.write(MCP23017_INTCONA);
-    Wire.write(0xFF);
+    Wire.write(0x00);
     Wire.endTransmission(false);
     Wire.write(MCP23017_INTCONB);
+    Wire.write(0x00);
+    Wire.endTransmission(false);
+    Wire.write(MCP23017_GPPUA);
+    Wire.write(0xFF);
+    Wire.endTransmission(false);
+    Wire.write(MCP23017_GPPUB);
+    Wire.write(0xFF);
+    Wire.endTransmission(false);
+    Wire.write(MCP23017_IPOLA);
+    Wire.write(0xFF);
+    Wire.endTransmission(false);
+    Wire.write(MCP23017_IPOLB);
     Wire.write(0xFF);
     Wire.endTransmission();
 }
