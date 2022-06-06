@@ -5,6 +5,8 @@
 
 // registers
 #define MCP23017_IODIRA 0x00   //!< I/O direction register
+#define MCP23017_IPOLA 0x01    //!< Input polarity register
+#define MCP23017_IPOLB 0x11    //!< Input polarity register
 #define MCP23017_IODIRB 0x10   //!< I/O direction register
 #define MCP23017_GPINTENA 0x02 //!< Interrupt-on-change control register
 #define MCP23017_GPINTENB 0x12 //!< Interrupt-on-change control register
