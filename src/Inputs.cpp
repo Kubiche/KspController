@@ -16,14 +16,22 @@ void updateAnalogs()   //read analog values and update accordingly.
 {  
   if ((millis() - analog_last_read) > analog_check_interval)
   {  
-    Joystick.setRxAxis(analogRead(A0));  
-    Joystick.setRyAxis(analogRead(A1));
-    Joystick.setRzAxis(analogRead(A2));
-    //Joystick.setXAxis(analogRead(A8));
-    //Joystick.setYAxis(analogRead(A9));
-    //Joystick.setZAxis(analogRead(A10));
-    //Joystick.setThrottle(analogRead(A6));
-    analog_last_read = millis();
-    Joystick.sendState(); //Send joystick updated states to the PC
+  Joystick.setRxAxis(analogRead(A0));  
+  Joystick.setRyAxis(analogRead(A1));
+  Joystick.setRzAxis(analogRead(A2));
+  //Joystick.setXAxis(analogRead(A8));
+  //Joystick.setYAxis(analogRead(A9));
+  //Joystick.setZAxis(analogRead(A10));
+  //Joystick.setThrottle(analogRead(A6));
+  analog_last_read = millis();
+  Joystick.sendState(); //Send joystick updated states to the PC
   }    
+}
+
+void updateDigitals()
+{
+  if (digitalRead(io_int_pin)) //check for interrupt pin from io expander chip to see if any changes in states.
+  {
+
+  }
 }

@@ -20,10 +20,11 @@ void setLedReg(uint8_t opcode, uint8_t val)
 
 void setLed(uint8_t dig, uint8_t seg, bool state)
 {
-  uint8_t mask = 0b10000000 >>(seg-1);
+  uint8_t mask = 0b10000000 >> (seg-1);
   if ((digit[dig] & mask) != state){
     digit[dig] ^= mask; 
-    setLedReg((dig+1), digit[dig]);
+    setLedReg((dig + 1), digit[dig]);
+    
   }
 }
 
