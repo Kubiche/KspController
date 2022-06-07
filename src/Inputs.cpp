@@ -1,5 +1,7 @@
 #include "Inputs.h"
 
+MCP23017 io1;
+
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
 
 // Create the Joystick
@@ -30,8 +32,15 @@ void updateAnalogs()   //read analog values and update accordingly.
 
 void updateDigitals()
 {
-  if (digitalRead(io_int_pin)) //check for interrupt pin from io expander chip to see if any changes in states.
+  if (digitalRead(io1_int_pin)) //check for interrupt pin from io expander chip to see if any changes in states.
   {
-
+    io1.readGPIOs(); 
+    for (uint8_t i = 0; i < 2; i++)
+    {      
+      for (uint8_t j = 0; j < 8; j++)
+      {        
+        Joystick.setButton( (j + (i * 8)), (io1.gpio[i] & (1 << j)));        
+      }
+    }
   }
 }

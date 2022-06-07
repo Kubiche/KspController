@@ -1,11 +1,8 @@
 #include <Arduino.h>
 #include <KerbalSimpit.h>
-#include <Joystick.h>
 #include <HID.h>
 #include <Wire.h>
 #include "inboundMessages.h"
-#include <leds.h>
-#include <MCP23017.h>
 #include "Inputs.h"
 
 #define DEBUG 0
@@ -20,7 +17,7 @@
 
 
 
-MCP23017 io1;
+extern MCP23017 io1;
 
 KerbalSimpit mySimpit(Serial);
 
