@@ -5,7 +5,7 @@
 #include "inboundMessages.h"
 #include "Inputs.h"
 
-#define DEBUG 0
+#define DEBUG 1
 
 #if DEBUG == 1
 #define debug(x) Serial.print(x)
@@ -43,10 +43,11 @@ void setup()
   //clear the display
   for (int i=8; i>0; i--)
   {
-    setLedReg(i, 0);
+    setLedReg(i, 255);
   }   
 
   // MCP23017 IO expanders
+  pinMode(io1_int_pin, INPUT);
   io1.init(0x21);
   
 
@@ -56,10 +57,10 @@ void setup()
   
   
   Serial.begin(115200); // Initialize Serial connection to mod
-  while (!mySimpit.init()) 
+  /*while (!mySimpit.init()) 
   {
     delay(100);
-  }
+  }*/
   
 
   mySimpit.inboundHandler(messageHandler); // callback function
@@ -80,5 +81,6 @@ void loop()
   mySimpit.update(); // Update messages from simpit mod, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
   updateAnalogs();
   updateDigitals();
+  debugln(io1.gpio[0]);
       
 }

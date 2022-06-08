@@ -46,7 +46,7 @@ uint8_t MCP23017::readGPIOs()
     Wire.write(MCP23017_GPIOA);
     Wire.endTransmission();
     Wire.requestFrom(_deviceAddress, 2);
-    uint8_t i = 0;
+    int i = 0;    
     while (Wire.available())
     {
         gpio[i] = Wire.read();
