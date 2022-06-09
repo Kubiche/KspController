@@ -1,5 +1,6 @@
 #include "MCP23X17.h"
 #include <Wire.h>
+#include "Debug.h"
 
 void MCP23017::init(int I2CAddress)
 {
@@ -8,33 +9,43 @@ void MCP23017::init(int I2CAddress)
     Wire.write(MCP23017_IOCON);
     Wire.write(0b01111010);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IODIRA);
     Wire.write(0xFF);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IODIRB);
     Wire.write(0xFF);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_GPINTENA);
     Wire.write(0xFF);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_GPINTENB);
     Wire.write(0xFF);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_INTCONA);
     Wire.write(0x00);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_INTCONB);
     Wire.write(0x00);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_GPPUA);
     Wire.write(0xFF);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_GPPUB);
     Wire.write(0xFF);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IPOLA);
     Wire.write(0xFF);
     Wire.endTransmission();
+    Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IPOLB);
     Wire.write(0xFF);
     Wire.endTransmission();
@@ -51,6 +62,10 @@ uint8_t MCP23017::readGPIOs()
     {
         gpio[i] = Wire.read();
         i++;
+        debug("GPIOA : ");
+        debugln(gpio[0]);
+        debug("GPIOB : ");
+        debugln(gpio[1]);        
     }
-    Wire.endTransmission();    
+        
 }

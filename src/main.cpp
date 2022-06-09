@@ -4,18 +4,7 @@
 #include <Wire.h>
 #include "inboundMessages.h"
 #include "Inputs.h"
-
-#define DEBUG 1
-
-#if DEBUG == 1
-#define debug(x) Serial.print(x)
-#define debugln(x) Serial.println(x)
-#else
-#define debug(x)
-#define debugln(x)
-#endif
-
-
+#include "Debug.h"
 
 extern MCP23017 io1;
 
@@ -81,6 +70,6 @@ void loop()
   mySimpit.update(); // Update messages from simpit mod, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
   updateAnalogs();
   updateDigitals();
-  debugln(io1.gpio[0]);
+  
       
 }

@@ -3,6 +3,8 @@
 #include <Arduino.h>
 
 
+
+
 // registers
 #define MCP23017_IODIRA 0x00   //!< I/O direction register
 #define MCP23017_IODIRB 0x01   //!< I/O direction register
@@ -12,7 +14,7 @@
 #define MCP23017_GPINTENB 0x05 //!< Interrupt-on-change control register
 #define MCP23017_INTCONA 0x08 //!< Default compare register for interrupt-on-change
 #define MCP23017_INTCONB 0x09 //!< Interrupt control register
-#define MCP23017_IOCON 0x0A  //!< Configuration register
+#define MCP23017_IOCON 0x05  //!< Configuration register
 #define MCP23017_GPPUA 0x0C   //!< Pull-up resistor configuration register
 #define MCP23017_GPPUB 0x0D    //!< Pull-up resistor configuration register
 #define MCP23017_INTCAPA 0x10 //!< Interrupt capture register
