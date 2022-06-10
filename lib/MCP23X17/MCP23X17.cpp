@@ -51,7 +51,7 @@ void MCP23017::init(int I2CAddress)
     Wire.endTransmission();
 }
 
-uint8_t MCP23017::readGPIOs()
+void MCP23017::readGPIOs()
 {
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_GPIOA);
@@ -66,6 +66,5 @@ uint8_t MCP23017::readGPIOs()
         debugln(gpio[0]);
         debug("GPIOB: ");
         debugln(gpio[1]);        
-    }
-        
+    }        
 }
