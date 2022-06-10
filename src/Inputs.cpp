@@ -39,7 +39,7 @@ void updateDigitals()
     {      
       for (uint8_t j = 0; j < 8; j++)
       {        
-        Joystick.setButton( (j + (i * 8)), (io1.gpio[i] & (1 << j)));        
+        Joystick.setButton( (j + (i * 8)), (io1.gpio[i] & (1 << j))); // This applies an offset to the button number, assigning to it the state fo the result of the gpio byte and corresponding mask.  
       }
     }
   }

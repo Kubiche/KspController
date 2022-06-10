@@ -62,9 +62,9 @@ uint8_t MCP23017::readGPIOs()
     {
         gpio[i] = Wire.read();
         i++;
-        debug("GPIOA : ");
+        debug("GPIOA: ");
         debugln(gpio[0]);
-        debug("GPIOB : ");
+        debug("GPIOB: ");
         debugln(gpio[1]);        
     }
         
