@@ -24,7 +24,7 @@ void updateAnalogs()   //read analog values and update accordingly.
   //Joystick.setZAxis(analogRead(A10));
   //Joystick.setThrottle(analogRead(A6));
   analog_last_read = millis();
-  Joystick.sendState(); //Send joystick updated states to the PC
+  
   }    
 }
 

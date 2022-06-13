@@ -58,5 +58,6 @@ void loop()
 {   
   mySimpit.update(); // Update messages from simpit mod, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
   updateAnalogs();
-  updateDigitals();      
+  updateDigitals();
+  Joystick.sendState(); //Send joystick updated states to the PC      
 }
