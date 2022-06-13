@@ -32,7 +32,7 @@ void updateAnalogs()   //read analog values and update accordingly.
 
 void updateDigitals()
 {
-  if (digitalRead(IO1_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
+  if (!digitalRead(IO1_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
   {
     io1.readGPIOs(); 
     for (uint8_t i = 0; i < 2; i++)
