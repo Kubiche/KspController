@@ -2,8 +2,6 @@
 
 #include <spi.h>
 
-
-
 // The Slave Selecte pin for the led controller
 #define LED_CS 7
 
@@ -22,8 +20,6 @@
 #define OP_SCANLIMIT   0x0B
 #define OP_SHUTDOWN    0x0C
 #define OP_DISPLAYTEST 0x0F
-
-
 
 //functions to control led rows at a time
 void setLedReg(uint8_t opcode, uint8_t val);
