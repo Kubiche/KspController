@@ -22,7 +22,7 @@ void setup()
   Wire.begin(); // set up I2c bus
   SPI.begin(); // set up SPI bus
 
-  // Set the joystick to manual update to prevent USB overflow
+  // Initiate and set the joystick to manual update to prevent USB overflow
 	Joystick.begin(false);
   
   
