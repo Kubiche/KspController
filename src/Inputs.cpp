@@ -16,7 +16,7 @@ Joystick_ Joystick(0x05,0x04,
 
 void updateAnalogs()   //read analog values and update accordingly.
 {  
-  if ((millis() - analog_last_read) > analog_check_interval)
+  if ((millis() - analog_last_read) > ANALOG_CHECK_INTERVAL)
   {  
   Joystick.setRxAxis(analogRead(A0));  
   Joystick.setRyAxis(analogRead(A1));
@@ -32,7 +32,7 @@ void updateAnalogs()   //read analog values and update accordingly.
 
 void updateDigitals()
 {
-  if (digitalRead(io1_int_pin)) //check for interrupt pin from io expander chip to see if any changes in states.
+  if (digitalRead(IO1_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
   {
     io1.readGPIOs(); 
     for (uint8_t i = 0; i < 2; i++)

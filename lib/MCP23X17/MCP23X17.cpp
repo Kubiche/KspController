@@ -2,12 +2,14 @@
 #include <Wire.h>
 #include "Debug.h"
 
-void MCP23017::init(int I2CAddress)
+void MCP23017::init(int I2CAddress, uint8_t intPin)
 {
     _deviceAddress = I2CAddress;
+    _intPin = intPin;
+    pinMode(_intPin, INPUT_PULLUP);
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IOCON);
-    Wire.write(0b01111010);
+    Wire.write(0b01111000);
     Wire.endTransmission();
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IODIRA);
@@ -61,10 +63,10 @@ void MCP23017::readGPIOs()
     while (Wire.available())
     {
         gpio[i] = Wire.read();
-        i++;
-        debug("GPIOA: ");
-        debugln(gpio[0]);
-        debug("GPIOB: ");
-        debugln(gpio[1]);        
-    }        
+        i++;                
+    }
+    debug("GPIOA: ");
+    debugln(gpio[0]);
+    debug("GPIOB: ");
+    debugln(gpio[1]); 
 }

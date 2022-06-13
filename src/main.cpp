@@ -6,11 +6,15 @@
 #include "Inputs.h"
 #include "Debug.h"
 
+
+
 extern MCP23017 io1;
 
 KerbalSimpit mySimpit(Serial);
 
 extern Joystick_ Joystick;
+
+
 
 void setup() 
 {
@@ -35,9 +39,8 @@ void setup()
     setLedReg(i, 255);
   }   
 
-  // MCP23017 IO expanders
-  pinMode(io1_int_pin, INPUT);
-  io1.init(0x21);
+  // MCP23017 IO expanders  
+  io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
   
 
 
