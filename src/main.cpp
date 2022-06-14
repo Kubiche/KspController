@@ -16,6 +16,8 @@ extern Joystick_ Joystick;
 
 
 
+
+
 void setup() 
 {
   
@@ -48,11 +50,15 @@ void setup()
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
   
   
-  Serial.begin(115200); // Initialize Serial connection to mod
-  /*while (!mySimpit.init()) 
+  Serial.begin(115200); // Initialize Serial connection to mod  
+  pinMode(BOOT_MODE_PIN, INPUT_PULLUP);
+  if (digitalRead(BOOT_MODE_PIN))
   {
-    delay(100);
-  }*/
+    while (!mySimpit.init()) 
+    {
+      delay(100);
+    }
+  }
   
 
   mySimpit.inboundHandler(messageHandler); // callback function
