@@ -33,7 +33,7 @@ void setLed(uint8_t dig, uint8_t seg, bool state)
 // These functions apply a mask to the byte/digit controlling the lower and upper part of each led bar and set a value on it leaving the ones for other bars alone
 void show_in_bar(uint8_t bar,uint8_t value)
 {
-  int barlevel;
+  unsigned int barlevel;
   barlevel = fullbar[bar] & ~barMask[bar];
   barlevel = barlevel<<(10-value);
   digit[bar+1] &= barMask[bar];

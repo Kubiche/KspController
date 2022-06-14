@@ -28,12 +28,12 @@
 class MCP23017 
 {
 public:
-    void init(int I2CAddress, uint8_t intPin);    
+    void init(uint8_t I2CAddress, uint8_t intPin);    
     void readGPIOs(); // Reads gpio registers from IC and stores them in the array bellow.
     uint8_t gpio[2];    
     
 private:
-    int _deviceAddress;
+    uint8_t _deviceAddress;
     uint8_t _intPin;
     
 };
