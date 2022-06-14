@@ -37,8 +37,7 @@ void setup()
   io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
-  
-  
+    
   Serial.begin(115200); // Initialize Serial connection to mod  
   pinMode(BOOT_MODE_PIN, INPUT_PULLUP);
   if (digitalRead(BOOT_MODE_PIN))
@@ -49,8 +48,7 @@ void setup()
     }
   }
   
-  mySimpit.inboundHandler(messageHandler); // callback function
-  
+  mySimpit.inboundHandler(messageHandler); // callback function  
   // Register to desired messages from simpit
   mySimpit.registerChannel(SF_STAGE_MESSAGE);
   mySimpit.registerChannel(LF_STAGE_MESSAGE);
