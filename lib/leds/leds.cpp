@@ -1,8 +1,5 @@
 #include "leds.h"
 
-
-
-
 uint8_t digit[8] {0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}; //array to store the max7219 digit values to be used by the leds
 
 void setLedReg(uint8_t opcode, uint8_t val) 

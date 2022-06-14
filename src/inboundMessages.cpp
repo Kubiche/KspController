@@ -1,6 +1,5 @@
 #include "inboundMessages.h"
 
-
 // Message handler required by simpit.
 void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
   switch(messageType) {

@@ -9,7 +9,7 @@ void MCP23017::init(int I2CAddress, uint8_t intPin)
     pinMode(_intPin, INPUT_PULLUP);
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IOCON);
-    Wire.write(0b01111000);
+    Wire.write(0b01111100);
     Wire.endTransmission();
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IODIRA);

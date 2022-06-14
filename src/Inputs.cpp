@@ -12,8 +12,6 @@ Joystick_ Joystick(0x05,0x04,
   false, true,            //  rudder or throttle
   false, false, false);    //  accelerator, brake, or steering
 
-
-
 void updateAnalogs()   //read analog values and update accordingly.
 {  
   if ((millis() - analog_last_read) > ANALOG_CHECK_INTERVAL)
@@ -26,7 +24,7 @@ void updateAnalogs()   //read analog values and update accordingly.
   //Joystick.setZAxis(analogRead(A10));
   //Joystick.setThrottle(analogRead(A6));
   analog_last_read = millis();
-  Joystick.sendState(); //Send joystick updated states to the PC
+  
   }    
 }
 
