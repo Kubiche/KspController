@@ -34,8 +34,8 @@ void setLed(uint8_t dig, uint8_t seg, bool state)
 void show_in_bar(uint8_t bar,uint8_t value)
 {
   unsigned int barlevel;
-  barlevel = fullbar[bar] & ~barMask[bar];
   barlevel = barlevel<<(10-value);
+  barlevel = fullbar[bar] & ~barMask[bar];  
   digit[bar+1] &= barMask[bar];
   digit[bar+1] |= barlevel;
   digit[bar] &= (barMask[bar]>>8);
