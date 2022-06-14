@@ -12,13 +12,6 @@ KerbalSimpit mySimpit(Serial);
 
 extern Joystick_ Joystick;
 
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> b4dc8173b4b66ece41e30b1270d1f06b849e972c
 void setup() 
 {  
   Wire.begin(); // set up I2c bus
@@ -44,17 +37,11 @@ void setup()
   io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
-<<<<<<< HEAD
   
   
   Serial.begin(115200); // Initialize Serial connection to mod  
   pinMode(BOOT_MODE_PIN, INPUT_PULLUP);
   if (digitalRead(BOOT_MODE_PIN))
-=======
-    
-  Serial.begin(115200); // Initialize Serial connection to mod
-  /*while (!mySimpit.init()) 
->>>>>>> b4dc8173b4b66ece41e30b1270d1f06b849e972c
   {
     while (!mySimpit.init()) 
     {

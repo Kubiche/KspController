@@ -9,12 +9,8 @@
 #define IO1_I2C_ADDRESS 0x21
 #define IO1_INT_PIN 5
 
-<<<<<<< HEAD
 #define BOOT_MODE_PIN 8
 
-
-=======
->>>>>>> b4dc8173b4b66ece41e30b1270d1f06b849e972c
 extern unsigned long analog_last_read;
 
 extern Joystick_ Joystick;
