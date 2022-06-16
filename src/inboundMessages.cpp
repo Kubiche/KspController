@@ -12,10 +12,10 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         // Convert the message we received to an Resource struct.
         mySStageFuel = parseResource(msg);
         if (mySStageFuel.available == 0){
-          show_in_bar_4(0);
+          show_in_bar(3, 0);
         }
         else {
-        show_in_bar_4(map(mySStageFuel.available, 0, mySStageFuel.total, 1, 10));
+        show_in_bar(3, map(mySStageFuel.available, 0, mySStageFuel.total, 1, 10));
         }      
       }
       break;
@@ -24,10 +24,10 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         resourceMessage myLStageFuel;
         myLStageFuel = parseResource(msg);
         if (myLStageFuel.available == 0){
-          show_in_bar_3(0);
+          show_in_bar(2, 0);
         }
         else {
-          show_in_bar_3(map(myLStageFuel.available, 0, myLStageFuel.total, 1, 10));
+          show_in_bar(2, map(myLStageFuel.available, 0, myLStageFuel.total, 1, 10));
         }
       }
       break;
@@ -36,10 +36,10 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         resourceMessage myMonoFuel;
         myMonoFuel = parseResource(msg);
         if (myMonoFuel.available == 0){
-          show_in_bar_2(0);
+          show_in_bar(1, 0);
         }
         else {
-          show_in_bar_2(map(myMonoFuel.available, 0, myMonoFuel.total, 1, 10));
+          show_in_bar(1, map(myMonoFuel.available, 0, myMonoFuel.total, 1, 10));
         }
       }
       break;
@@ -48,10 +48,10 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         resourceMessage myBatteryLevel;
         myBatteryLevel = parseResource(msg);
         if (myBatteryLevel.available == 0){
-          show_in_bar_1(0);
+          show_in_bar(0, 0);
         }
         else {        
-        show_in_bar_1(map(myBatteryLevel.available, 0, myBatteryLevel.total, 1, 10));
+        show_in_bar(0, map(myBatteryLevel.available, 0, myBatteryLevel.total, 1, 10));
         }
       }
       break;
@@ -60,10 +60,10 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         resourceMessage mySFuel;
         mySFuel = parseResource(msg);
         if (mySFuel.available == 0){
-          show_in_bar_4(0);
+          show_in_bar(3, 0);
         }
         else {
-          show_in_bar_4(map(mySFuel.available, 0, mySFuel.total, 1, 10));
+          show_in_bar(3, map(mySFuel.available, 0, mySFuel.total, 1, 10));
         }
       }
       break;  
@@ -74,10 +74,10 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         myLFuel = parseResource(msg);
       if (myLFuel.available == 0)
       {
-        show_in_bar_2(0);
+        show_in_bar(1, 0);
       }
       else {
-        show_in_bar_2(map(myLFuel.available, 0, myLFuel.total, 1, 10));
+        show_in_bar(1, map(myLFuel.available, 0, myLFuel.total, 1, 10));
       }
     }
       break;
