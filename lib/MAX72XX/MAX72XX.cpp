@@ -1,11 +1,9 @@
 #include "MAX72XX.h"
+#include "Debug.h"
 
 uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit values to be used by the leds
 
-static const uint16_t fullbar[4] {0b1111111111000000, 0b0011111111110000, 0b0000111111111100, 0b0000001111111111}; 
 
-// arrays to store mask for bit manupulation depending on the led bar
-static const uint16_t barMask[4] {0b0000000000111111, 0b1100000000001111, 0b1111000000000011, 0b1111110000000000};
 
 void setLedReg(uint8_t opcode, uint8_t val) 
 {
@@ -32,15 +30,20 @@ void setLed(uint8_t dig, uint8_t seg, bool state)
 
 // These functions apply a mask to the byte/digit controlling the lower and upper part of each led bar and set a value on it leaving the ones for other bars alone
 void show_in_bar(uint8_t bar,uint8_t value)
-{   
-  uint16_t barlevel = fullbar[bar]<<(10-value);
-  barlevel = barlevel & ~barMask[bar];  
+{ 
+  const unsigned int fullbar[4] {0b1111111111000000, 0b0011111111110000, 0b0000111111111100, 0b0000001111111111};
+  // arrays to store mask for bit manupulation depending on the led bar
+  const unsigned int barMask[4] {0b0000000000111111, 0b1100000000001111, 0b1111000000000011, 0b1111110000000000};  
+  uint8_t shifted = (10 - value);
+  unsigned int barlevel = fullbar[bar]<<shifted;  
+  unsigned int levelmask = ~barMask[bar];
+  barlevel &= levelmask;  
   digit[(bar+1)] &= barMask[bar];
-  digit[(bar+1)] |= barlevel;
-  setLedReg((bar+1),digit[(bar+1)]);
-  digit[bar] &= (barMask[bar]>>8);
-  digit[bar] |= (barlevel>>8);
-  setLedReg((bar), digit[bar]);      
+  digit[(bar+1)] |= barlevel;  
+  setLedReg((bar+2), digit[(bar+1)]);
+  digit[bar] &= barMask[bar]>>8;
+  digit[bar] |= barlevel>>8;  
+  setLedReg((bar+1), digit[bar]);      
 }     
     
 

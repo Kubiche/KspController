@@ -30,7 +30,7 @@ void setup()
   //clear the display
   for (int i=8; i>0; i--)
   {
-    setLedReg(i, 255);
+    setLedReg(i, 0);
   }   
 
   // MCP23017 IO expanders  
@@ -54,7 +54,8 @@ void setup()
   mySimpit.registerChannel(LF_STAGE_MESSAGE);
   mySimpit.registerChannel(MONO_MESSAGE);
   mySimpit.registerChannel(ELECTRIC_MESSAGE);
-  mySimpit.registerChannel(ACTIONSTATUS_MESSAGE);  
+  mySimpit.registerChannel(ACTIONSTATUS_MESSAGE);   
+
 }
 
 void loop() 
