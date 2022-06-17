@@ -53,20 +53,35 @@ void MCP23017::init(uint8_t I2CAddress, uint8_t intPin)
     Wire.endTransmission();
 }
 
-void MCP23017::readGPIOs()
+uint8_t MCP23017::readGPIOs()
 {
-    Wire.beginTransmission(_deviceAddress);
-    Wire.write(MCP23017_GPIOA);
-    Wire.endTransmission();
-    Wire.requestFrom(_deviceAddress, 2);
-    int i = 0;    
-    while (Wire.available())
-    {
-        gpio[i] = Wire.read();
-        i++;                
-    }
-    debug("GPIOA: ");
-    debugln(gpio[0]);
-    debug("GPIOB: ");
-    debugln(gpio[1]); 
+  Wire.beginTransmission(_deviceAddress);
+  Wire.write(MCP23017_INTFB);
+  Wire.endTransmission();
+  Wire.requestFrom(_deviceAddress, 2);
+  uint8_t i = 0;
+  unsigned int intflag = 0;
+  while (Wire.available())
+  {
+    intflag = intflag << (8*i);
+    intflag = (intflag | Wire.read());    
+    i++;
+  }
+  uint8_t bitpos = 0;
+  while ((intflag - (1 << bitpos)))
+  {
+    bitpos++;
+  }
+  Wire.beginTransmission(_deviceAddress);
+  Wire.write(MCP23017_GPIOB);
+  Wire.endTransmission();
+  Wire.requestFrom(_deviceAddress, 2);
+  int j = 0;    
+  while (Wire.available())
+  {
+    gpio = gpio << (8*j);
+    gpio = (gpio | Wire.read());
+    j++;                
+  }
+  return bitpos;
 }

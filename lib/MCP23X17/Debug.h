@@ -4,8 +4,8 @@
 
 #if DEBUG == 1
 #define debug(x) Serial.print(x)
-#define debugln(x) Serial.println(x)
+#define debugln(x, y) Serial.println(x, y)
 #else
 #define debug(x)
-#define debugln(x)
+#define debugln(x, y)
 #endif                                            

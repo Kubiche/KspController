@@ -32,13 +32,7 @@ void updateDigitals()
 {
   if (!digitalRead(IO1_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
   {
-    io1.readGPIOs(); 
-    for (uint8_t i = 0; i < 2; i++)
-    {      
-      for (uint8_t j = 0; j < 8; j++)
-      {        
-        Joystick.setButton( (j + (i * 8)), (io1.gpio[i] & (1 << j))); // This applies an offset to the button number, assigning to it the state fo the result of the gpio byte and corresponding mask.  
-      }
-    }
+    uint8_t button = io1.readGPIOs();
+    Joystick.setButton( button, (io1.gpio & (1 << button)));
   }
 }

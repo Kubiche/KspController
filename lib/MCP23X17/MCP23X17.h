@@ -19,6 +19,8 @@
 #define MCP23017_GPPUB 0x0D    //!< Pull-up resistor configuration register
 #define MCP23017_INTCAPA 0x10 //!< Interrupt capture register
 #define MCP23017_INTCAPB 0x11 //!< Interrupt capture register
+#define MCP23017_INTFA 0x0E   //!< interrup pin capture register
+#define MCP23017_INTFB 0x0F   //!< interrup pin capture register
 #define MCP23017_GPIOA 0x12   //!< Port register
 #define MCP23017_GPIOB 0x13   //!< Port register
 
@@ -29,11 +31,10 @@ class MCP23017
 {
 public:
     void init(uint8_t I2CAddress, uint8_t intPin);    
-    void readGPIOs(); // Reads gpio registers from IC and stores them in the array bellow.
-    uint8_t gpio[2];    
+    uint8_t readGPIOs(); // Reads gpio registers from IC and stores them in the array bellow.
+    unsigned int gpio;    
     
 private:
     uint8_t _deviceAddress;
-    uint8_t _intPin;
-    
+    uint8_t _intPin;    
 };
