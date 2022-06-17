@@ -16,9 +16,9 @@ void updateAnalogs()   //read analog values and update accordingly.
 {  
   if ((millis() - analog_last_read) > ANALOG_CHECK_INTERVAL)
   {  
-  Joystick.setRxAxis(analogRead(A0));  
-  Joystick.setRyAxis(analogRead(A1));
-  Joystick.setRzAxis(analogRead(A2));
+  //Joystick.setRxAxis(analogRead(A0));  
+  //Joystick.setRyAxis(analogRead(A1));
+  //Joystick.setRzAxis(analogRead(A2));
   //Joystick.setXAxis(analogRead(A8));
   //Joystick.setYAxis(analogRead(A9));
   //Joystick.setZAxis(analogRead(A10));
