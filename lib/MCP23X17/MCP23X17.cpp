@@ -67,6 +67,8 @@ uint8_t MCP23017::readGPIOs()
     intflag = (intflag | Wire.read());    
     i++;
   }
+  debug("intflag: ");
+  debuglnB(intflag);
   uint8_t bitpos = 0;
   while ((intflag - (1 << bitpos)))
   {
@@ -82,6 +84,6 @@ uint8_t MCP23017::readGPIOs()
     gpio = gpio << (8*j);
     gpio = (gpio | Wire.read());
     j++;                
-  }
+  }  
   return bitpos;
 }

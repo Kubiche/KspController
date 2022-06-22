@@ -1,11 +1,13 @@
 #pragma once
 
-#define DEBUG 0
+#define DEBUG 1
 
 #if DEBUG == 1
 #define debug(x) Serial.print(x)
-#define debugln(x, y) Serial.println(x, y)
+#define debugln(x) Serial.println(x)
+#define debuglnB(x) Serial.print(x, BIN)
 #else
 #define debug(x)
-#define debugln(x, y)
+#define debugln(x)
+#define debuglnB(x) 
 #endif                                            

@@ -40,12 +40,18 @@ void setup()
     
   Serial.begin(115200); // Initialize Serial connection to mod  
   pinMode(BOOT_MODE_PIN, INPUT_PULLUP);
+  delay(5000);
   if (digitalRead(BOOT_MODE_PIN))
   {
     while (!mySimpit.init()) 
     {
       delay(100);
     }
+    debugln("Connected to MOD");
+  }
+  else
+  {
+    debugln("MOD connection bypassed");
   }
   
   mySimpit.inboundHandler(messageHandler); // callback function  
