@@ -1,4 +1,5 @@
 #include "Inputs.h"
+#include "Debug.h"
 
 MCP23017 io1;
 
@@ -34,6 +35,10 @@ void updateDigitals()
   {
     unsigned int flags = io1.readIntFlag();
     unsigned int inputs = io1.readGPIOs();
+    debug("Flags: ");
+    debuglnB(flags);
+    debug("inputs: ");
+    debuglnB(inputs);
     for (uint8_t i = 0; i < 16; i++)
     {
       if (flags & (1 << i))
