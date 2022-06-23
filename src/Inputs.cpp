@@ -35,15 +35,23 @@ void updateDigitals()
   {
     unsigned int flags = io1.readIntFlag();
     unsigned int inputs = io1.readGPIOs();
-    debug("Flags: ");
+    debug("Flags : ");
     debuglnB(flags);
     debug("inputs: ");
     debuglnB(inputs);
-    for (uint8_t i = 0; i < 16; i++)
-    {
-      if (flags & (1 << i))
+    for (unsigned int i = 0; i < 16; i++)
+    {      
+      unsigned int mask = (1 << i);      
+      if (flags & mask)
       {
-        Joystick.setButton(i, (inputs & (1 << i)));
+        debug("i: ");
+        debugln(i);
+        debug("mask: ");
+        debuglnB(mask);
+        bool state = inputs & mask; //cast the bitwise and of the flagged bit and the read bit into a boolean to acomodate the byte allowed by the library function.
+        Joystick.setButton(i, state);
+        debug("state: ");
+        debugln(state);
       } 
     }    
   }
