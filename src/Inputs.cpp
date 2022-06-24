@@ -33,8 +33,8 @@ void updateDigitals()
 {
   if (!digitalRead(IO1_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
   {
-    unsigned int flags = io1.readIntFlag();
-    unsigned int inputs = io1.readGPIOs();
+    unsigned int flags = io1.readIntFlag(); //read the interrupt flags to see which pin/s trigerred the interrupt
+    unsigned int inputs = io1.readGPIOs();  //read the states of the gpio pins
     debug("Flags : ");
     debuglnB(flags);
     debug("inputs: ");
@@ -49,7 +49,7 @@ void updateDigitals()
         debug("mask: ");
         debuglnB(mask);
         bool state = inputs & mask; //cast the bitwise and of the flagged bit and the read bit into a boolean to acomodate the byte allowed by the library function.
-        Joystick.setButton(i, state);
+        Joystick.setButton(i, state); //update the state of the button associated with the pin/s that trigerred the interrupt
         debug("state: ");
         debugln(state);
       } 

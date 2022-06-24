@@ -53,7 +53,7 @@ void MCP23017::init(uint8_t I2CAddress, uint8_t intPin)
     Wire.endTransmission();
 }
 
-unsigned int MCP23017::readGPIOs()
+unsigned int MCP23017::readGPIOs() //reads the state of the gpio pins
 { 
   unsigned int gpio = 0;
   Wire.beginTransmission(_deviceAddress);
@@ -70,7 +70,7 @@ unsigned int MCP23017::readGPIOs()
   return gpio;
 }
 
-unsigned int MCP23017::readIntFlag()
+unsigned int MCP23017::readIntFlag() //reads teh interrup flag for the gpios
 {
   Wire.beginTransmission(_deviceAddress);
   Wire.write(MCP23017_INTFB);
