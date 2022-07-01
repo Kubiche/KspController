@@ -1,6 +1,7 @@
 #include "Inputs.h"
 #include "Debug.h"
 
+
 MCP23017 io1;
 
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
@@ -24,6 +25,8 @@ void updateAnalogs()   //read analog values and update accordingly.
   //Joystick.setYAxis(analogRead(A9));
   //Joystick.setZAxis(analogRead(A10));
   //Joystick.setThrottle(analogRead(A6));
+  debug("adc0: ");
+  debugln(readADC(0));
   analog_last_read = millis();
   
   }    
