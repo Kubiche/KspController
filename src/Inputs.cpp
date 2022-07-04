@@ -21,19 +21,19 @@ void updateAnalogs()   //read analog values and update accordingly.
     unsigned int channel[8];
     for (uint8_t i = 0; i < 7; i++)
     {
-      channel[i] = readADC(i);
+      channel[i] = readADC(i); //Read all channels of the ADC IC and store it in the array
       debug("channel");
       debug(i);
       debug(": ");
       debugln(channel[i]);
     }
-    analog_last_read = millis();
-    //Joystick.setRxAxis();  
-    //Joystick.setRyAxis();
-    //Joystick.setRzAxis();
+    analog_last_read = millis();.    
     Joystick.setXAxis(channel[0]);
     Joystick.setYAxis(channel[1]);
     Joystick.setZAxis(channel[2]);
+    //Joystick.setRxAxis(channel[3]);  
+    //Joystick.setRyAxis(channel[4]);
+    //Joystick.setRzAxis(channel[5]);
     Joystick.setThrottle(channel[6]);  
   }    
 }
