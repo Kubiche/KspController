@@ -17,18 +17,24 @@ Joystick_ Joystick(0x05,0x04,
 void updateAnalogs()   //read analog values and update accordingly.
 {  
   if ((millis() - analog_last_read) > ANALOG_CHECK_INTERVAL)
-  {  
-  Joystick.setRxAxis(readADC(0));  
-  Joystick.setRyAxis(readADC(1));
-  Joystick.setRzAxis(readADC(2));
-  //Joystick.setXAxis(readADC());
-  //Joystick.setYAxis(readADC());
-  //Joystick.setZAxis(readADC(A));
-  Joystick.setThrottle(readADC(6));
-  debug("adc0: ");
-  debugln(readADC(0));  
-  analog_last_read = millis();
-  
+  {
+    unsigned int channel[8];
+    for (uint8_t i = 0; i < 7; i++)
+    {
+      channel[i] = readADC(i);
+      debug("channel");
+      debug(i);
+      debug(": ");
+      debugln(channel[i]);
+    }
+    analog_last_read = millis();
+    //Joystick.setRxAxis();  
+    //Joystick.setRyAxis();
+    //Joystick.setRzAxis();
+    Joystick.setXAxis(channel[0]);
+    Joystick.setYAxis(channel[1]);
+    Joystick.setZAxis(channel[2]);
+    Joystick.setThrottle(channel[6]);  
   }    
 }
 
