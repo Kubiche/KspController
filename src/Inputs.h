@@ -2,6 +2,7 @@
 
 #include <Joystick.h>
 #include <MCP23X17.h>
+#include <MCP300X.h>
 
 
 #define ANALOG_CHECK_INTERVAL 5 // Analog read interval to prevent USB saturation.

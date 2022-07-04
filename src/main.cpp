@@ -19,13 +19,19 @@ void setup()
 
   // Initiate and set the joystick to manual update to prevent USB overflow
 	Joystick.begin(false);  
-  
+
+ //ADC
+ pinMode(ADC_CS, OUTPUT);
+ digitalWrite(ADC_CS, HIGH);
+
+ 
   //Led driver MAX7219  
   pinMode(LED_CS, OUTPUT); // Set the CS pin as output
-  digitalWrite(LED_CS, HIGH); // Set CS pin to High
+  digitalWrite(LED_CS, HIGH); // Set CS pin to High  
   setLedReg(OP_SHUTDOWN, 1); // Turn LED controller on
   setLedReg(OP_SCANLIMIT, 7); // set to scan all digits
   setLedReg(OP_INTENSITY, 2); // Set intensity to 2 of 16
+  
   
   //clear the display
   for (int i=8; i>0; i--)
@@ -46,8 +52,7 @@ void setup()
     while (!mySimpit.init()) 
     {
       delay(100);
-    }
-    debugln("Connected to MOD");
+    }    
   }
   else
   {

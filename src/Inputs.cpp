@@ -1,6 +1,7 @@
 #include "Inputs.h"
 #include "Debug.h"
 
+
 MCP23017 io1;
 
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
@@ -16,16 +17,24 @@ Joystick_ Joystick(0x05,0x04,
 void updateAnalogs()   //read analog values and update accordingly.
 {  
   if ((millis() - analog_last_read) > ANALOG_CHECK_INTERVAL)
-  {  
-  //Joystick.setRxAxis(analogRead(A0));  
-  //Joystick.setRyAxis(analogRead(A1));
-  //Joystick.setRzAxis(analogRead(A2));
-  //Joystick.setXAxis(analogRead(A8));
-  //Joystick.setYAxis(analogRead(A9));
-  //Joystick.setZAxis(analogRead(A10));
-  //Joystick.setThrottle(analogRead(A6));
-  analog_last_read = millis();
-  
+  {
+    unsigned int channel[8];
+    for (uint8_t i = 0; i < 7; i++)
+    {
+      channel[i] = readADC(i); //Read all channels of the ADC IC and store it in the array
+      debug("channel");
+      debug(i);
+      debug(": ");
+      debugln(channel[i]);
+    }
+    analog_last_read = millis();.    
+    Joystick.setXAxis(channel[0]);
+    Joystick.setYAxis(channel[1]);
+    Joystick.setZAxis(channel[2]);
+    //Joystick.setRxAxis(channel[3]);  
+    //Joystick.setRyAxis(channel[4]);
+    //Joystick.setRzAxis(channel[5]);
+    Joystick.setThrottle(channel[6]);  
   }    
 }
 
