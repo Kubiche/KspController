@@ -27,7 +27,7 @@ void updateAnalogs()   //read analog values and update accordingly.
       debug(": ");
       debugln(channel[i]);
     }
-    analog_last_read = millis();.    
+    analog_last_read = millis();    
     Joystick.setXAxis(channel[0]);
     Joystick.setYAxis(channel[1]);
     Joystick.setZAxis(channel[2]);
