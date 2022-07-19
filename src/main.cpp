@@ -7,6 +7,7 @@
 #include "Debug.h"
 
 extern MCP23017 io1;
+extern MCP23017 io2;
 
 KerbalSimpit mySimpit(Serial);
 
@@ -41,6 +42,8 @@ void setup()
 
   // MCP23017 IO expanders  
   io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
+  io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
+
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     

@@ -18,7 +18,7 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         show_in_bar(3, map(mySStageFuel.available, 0, mySStageFuel.total, 1, 10));
         }      
       }
-      break;
+        break;
     case LF_STAGE_MESSAGE: //Current stage liquid fuel
       if (msgSize == sizeof(resourceMessage)){
         resourceMessage myLStageFuel;

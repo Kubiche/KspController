@@ -3,6 +3,7 @@
 
 
 MCP23017 io1;
+MCP23017 io2;
 
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
 
@@ -59,6 +60,31 @@ void updateDigitals()
         debuglnB(mask);
         bool state = inputs & mask; //cast the bitwise and of the flagged bit and the read bit into a boolean to acomodate the byte allowed by the library function.
         Joystick.setButton(i, state); //update the state of the button associated with the pin/s that trigerred the interrupt
+        debug("state: ");
+        debugln(state);
+      } 
+    }    
+  }
+
+  if (!digitalRead(IO2_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
+  {
+    unsigned int flags = io2.readIntFlag(); //read the interrupt flags to see which pin/s trigerred the interrupt
+    unsigned int inputs = io2.readGPIOs();  //read the states of the gpio pins
+    debug("Flags : ");
+    debuglnB(flags);
+    debug("inputs: ");
+    debuglnB(inputs);
+    for (unsigned int i = 0; i < 16; i++)
+    {      
+      unsigned int mask = (1 << i);      
+      if (flags & mask)
+      {
+        debug("i: ");
+        debugln((i+16));
+        debug("mask: ");
+        debuglnB(mask);
+        bool state = inputs & mask; //cast the bitwise and of the flagged bit and the read bit into a boolean to acomodate the byte allowed by the library function.
+        Joystick.setButton((i + 16), state); //update the state of the button associated with the pin/s that trigerred the interrupt
         debug("state: ");
         debugln(state);
       } 
