@@ -9,7 +9,7 @@ unsigned long analog_last_read = 0; // variable to store the time of the last an
 
 // Create the Joystick
 Joystick_ Joystick(0x05,0x04,
-  16, 0,                    //  Button Count, Hat Switch Count
+  32, 0,                    //  Button Count, Hat Switch Count
   true, true, true,     //  X and Y and Z Axis
   true, true, true,        //  Rx, Ry, or Rz
   false, true,            //  rudder or throttle
