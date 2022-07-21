@@ -37,7 +37,7 @@ void setup()
   //clear the display
   for (int i=8; i>0; i--)
   {
-    setLedReg(i, 0);
+    setLedReg(i, 255);
   }   
 
   // MCP23017 IO expanders  
