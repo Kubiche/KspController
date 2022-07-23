@@ -42,8 +42,8 @@ void show_in_bar(uint8_t bar,uint8_t value)
     digit[(bar+1)] &= barMask[bar]; // Apply LSBits of actual mask to the top byte of the bar 
     digit[(bar+1)] |= barlevel;     // Apply the LSBits of the value to the top byte of bar
     setLedReg((bar+2), digit[(bar+1)]); // Send the new value of the top byte of the bar to the proper digit
-    digit[bar] &= barMask[bar]>>8;      // Apply MSBits of mask to the bottom byte of the bar
-    digit[bar] |= barlevel>>8;          // Apply the MSBits of the value to the bottom byte of the bar
+    digit[bar] &= barMask[bar] >> 8;      // Apply MSBits of mask to the bottom byte of the bar
+    digit[bar] |= barlevel >> 8;          // Apply the MSBits of the value to the bottom byte of the bar
     setLedReg((bar+1), digit[bar]);     //  Send the new value of the bottom byte to the propper digit
   }
 }     
