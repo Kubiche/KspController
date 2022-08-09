@@ -11,6 +11,8 @@ extern MCP23017 io2;
 
 KerbalSimpit mySimpit(Serial);
 
+LED leds(LED_CS, 2);
+
 extern Joystick_ Joystick;
 
 void setup() 
@@ -26,23 +28,14 @@ void setup()
  digitalWrite(ADC_CS, HIGH);
 
  
-  //Led driver MAX7219  
-  pinMode(LED_CS, OUTPUT); // Set the CS pin as output
-  digitalWrite(LED_CS, HIGH); // Set CS pin to High  
-  setLedReg(OP_SHUTDOWN, 1); // Turn LED controller on
-  setLedReg(OP_SCANLIMIT, 7); // set to scan all digits
-  setLedReg(OP_INTENSITY, 2); // Set intensity to 2 of 16
+
   
   
-  //clear the display
-  for (int i=8; i>0; i--)
-  {
-    setLedReg(i, 0);
-  }   
+   
 
   // MCP23017 IO expanders  
-  io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
-  io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
+  //io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
+  //io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
 
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------

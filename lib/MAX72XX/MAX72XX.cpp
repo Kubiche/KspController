@@ -4,21 +4,39 @@
 uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit values to be used by the leds
 
 
+LED::LED(int CS, uint8_t numOfDevices)
+{
+  _LED_CS = CS;
+  _numOfDevices = numOfDevices;
+  
+    //Led driver MAX7219  
+  pinMode(_LED_CS, OUTPUT); // Set the CS pin as output
+  digitalWrite(_LED_CS, HIGH); // Set CS pin to High  
+  setLedReg(OP_SHUTDOWN, 1); // Turn LED controller on
+  setLedReg(OP_SCANLIMIT, 7); // set to scan all digits
+  setLedReg(OP_INTENSITY, 2); // Set intensity to 2 of 16
+  
+   //clear the display
+  for (int i=8; i>0; i--)
+  {
+    setLedReg(i, 0);
+  } 
+}
 
-void setLedReg(uint8_t opcode, uint8_t val) 
+void LED::setLedReg(uint8_t opcode, uint8_t val) 
 {
   uint8_t led_buffer[2];
   led_buffer[0] = opcode;
   led_buffer[1] = val; 
   SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
-  digitalWrite(LED_CS, LOW);
+  digitalWrite(_LED_CS, LOW);
   SPI.transfer(led_buffer[0]);
   SPI.transfer(led_buffer[1]);
-  digitalWrite(LED_CS, HIGH);
+  digitalWrite(_LED_CS, HIGH);
   SPI.endTransaction();
 }
 
-void setLed(uint8_t dig, uint8_t seg, bool state)
+void LED::setLed(uint8_t dig, uint8_t seg, bool state)
 {
   uint8_t mask = 0b10000000 >> (seg-1);
   if ((digit[dig] & mask) != state){
@@ -29,7 +47,7 @@ void setLed(uint8_t dig, uint8_t seg, bool state)
 }
 
 // These functions apply a mask to the byte/digit controlling the lower and upper part of each led bar and set a value on it leaving the ones for other bars alone
-void show_in_bar(uint8_t bar,uint8_t value)
+void LED::show_in_bar(uint8_t bar,uint8_t value)
 { 
   if ((value >= 0) && (value <= 10))
   {
@@ -42,8 +60,8 @@ void show_in_bar(uint8_t bar,uint8_t value)
     digit[(bar+1)] &= barMask[bar]; // Apply LSBits of actual mask to the top byte of the bar 
     digit[(bar+1)] |= barlevel;     // Apply the LSBits of the value to the top byte of bar
     setLedReg((bar+2), digit[(bar+1)]); // Send the new value of the top byte of the bar to the proper digit
-    digit[bar] &= barMask[bar]>>8;      // Apply MSBits of mask to the bottom byte of the bar
-    digit[bar] |= barlevel>>8;          // Apply the MSBits of the value to the bottom byte of the bar
+    digit[bar] &= barMask[bar] >> 8;      // Apply MSBits of mask to the bottom byte of the bar
+    digit[bar] |= barlevel >> 8;          // Apply the MSBits of the value to the bottom byte of the bar
     setLedReg((bar+1), digit[bar]);     //  Send the new value of the bottom byte to the propper digit
   }
 }     

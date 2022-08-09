@@ -21,12 +21,23 @@
 #define OP_SHUTDOWN    0x0C
 #define OP_DISPLAYTEST 0x0F
 
-//functions to control led rows at a time
-void setLedReg(uint8_t opcode, uint8_t val);
 
-//Funtion for individual led toggling
-void setLed(uint8_t dig, uint8_t seg, bool state);
+class LED
+{
+public:
+    LED(int CS, uint8_t numOfDevices);
 
-// functions to diplay mapped values into 10 segment led bars
-void show_in_bar( uint8_t bar, uint8_t value);
+    //functions to control led rows at a time
+    void setLedReg(uint8_t opcode, uint8_t val);
+
+    //Funtion for individual led toggling
+    void setLed(uint8_t dig, uint8_t seg, bool state);
+
+    // functions to diplay mapped values into 10 segment led bars
+    void show_in_bar( uint8_t bar, uint8_t value);
+  
+private:
+    int _LED_CS;
+    uint8_t _numOfDevices;
+};      
  

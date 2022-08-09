@@ -2,8 +2,8 @@
 #include "Debug.h"
 
 
-MCP23017 io1;
-MCP23017 io2;
+MCP23017 io1(IO1_I2C_ADDRESS, IO1_INT_PIN);
+MCP23017 io2(IO2_I2C_ADDRESS, IO2_INT_PIN);
 
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
 
