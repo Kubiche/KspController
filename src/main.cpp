@@ -31,7 +31,15 @@ void setup()
 
   
   
+<<<<<<< HEAD
    
+=======
+  //clear the display
+  for (int i=8; i>0; i--)
+  {
+    setLedReg(i, 255);
+  }   
+>>>>>>> 41b3c0d047f8cbee7984462c42c8ce00c5af2aba
 
   // MCP23017 IO expanders  
   //io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
@@ -42,7 +50,7 @@ void setup()
     
   Serial.begin(115200); // Initialize Serial connection to mod  
   pinMode(BOOT_MODE_PIN, INPUT_PULLUP);
-  delay(5000);
+  delay(1000);
   if (digitalRead(BOOT_MODE_PIN))
   {
     while (!mySimpit.init()) 
