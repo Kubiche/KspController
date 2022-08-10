@@ -2,9 +2,6 @@
 
 #include <spi.h>
 
-// The Slave Selecte pin for the led controller
-#define LED_CS 10
-
 //the opcodes for the MAX7221 and MAX7219
 #define OP_NOOP   0x00
 #define OP_DIGIT0 0x01
@@ -28,13 +25,13 @@ public:
     LED(int CS, uint8_t numOfDevices);
 
     //functions to control led rows at a time
-    void setLedReg(uint8_t opcode, uint8_t val);
+    void setLedReg(uint8_t device, uint8_t opcode, uint8_t val);
 
     //Funtion for individual led toggling
-    void setLed(uint8_t dig, uint8_t seg, bool state);
+    void setLed(uint8_t device, uint8_t dig, uint8_t seg, bool state);
 
     // functions to diplay mapped values into 10 segment led bars
-    void show_in_bar( uint8_t bar, uint8_t value);
+    void show_in_bar(uint8_t device, uint8_t bar, uint8_t value);
   
 private:
     int _LED_CS;

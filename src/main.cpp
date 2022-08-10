@@ -5,13 +5,14 @@
 #include "inboundMessages.h"
 #include "Inputs.h"
 #include "Debug.h"
+#include "Defines.h"
+#include "MAX72XX.h"
 
 extern MCP23017 io1;
 extern MCP23017 io2;
 
 KerbalSimpit mySimpit(Serial);
-
-LED leds(LED_CS, 2);
+LED led(LED_CS, 2);
 
 extern Joystick_ Joystick;
 
@@ -25,26 +26,12 @@ void setup()
 
  //ADC
  pinMode(ADC_CS, OUTPUT);
- digitalWrite(ADC_CS, HIGH);
-
- 
-
-  
-  
-<<<<<<< HEAD
+ digitalWrite(ADC_CS, HIGH);  
    
-=======
-  //clear the display
-  for (int i=8; i>0; i--)
-  {
-    setLedReg(i, 255);
-  }   
->>>>>>> 41b3c0d047f8cbee7984462c42c8ce00c5af2aba
 
   // MCP23017 IO expanders  
   //io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
   //io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
-
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
