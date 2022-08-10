@@ -2,6 +2,15 @@
 
 #include <Arduino.h>
 
-#define ADC_CS 9
+class MCP300X
+{
 
-unsigned int readADC(uint8_t channel);
+public:
+
+  void init(uint8_t CS);
+  unsigned int read(uint8_t channel);
+
+private:
+  uint8_t _CS;
+
+};

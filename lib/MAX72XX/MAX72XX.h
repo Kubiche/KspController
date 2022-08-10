@@ -19,10 +19,10 @@
 #define OP_DISPLAYTEST 0x0F
 
 
-class LED
+class MAX72XX
 {
 public:
-    LED(int CS, uint8_t numOfDevices);
+    void init(int CS, uint8_t numOfDevices);
 
     //functions to control led rows at a time
     void setLedReg(uint8_t device, uint8_t opcode, uint8_t val);

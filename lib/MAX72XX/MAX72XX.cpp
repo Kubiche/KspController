@@ -4,7 +4,7 @@
 uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit values to be used by the leds
 
 
-LED::LED(int CS, uint8_t numOfDevices)
+ void MAX72XX::init(int CS, uint8_t numOfDevices)
 {
   _LED_CS = CS;
   _numOfDevices = numOfDevices;
@@ -22,7 +22,7 @@ LED::LED(int CS, uint8_t numOfDevices)
   }  
 }
 
-void LED::setLedReg(uint8_t device, uint8_t opcode, uint8_t val) 
+void MAX72XX::setLedReg(uint8_t device, uint8_t opcode, uint8_t val) 
 {
   uint16_t led_buffer[_numOfDevices] = {};
   led_buffer[device] = opcode;
@@ -38,7 +38,7 @@ void LED::setLedReg(uint8_t device, uint8_t opcode, uint8_t val)
   SPI.endTransaction();
 }
 
-void LED::setLed(uint8_t device, uint8_t dig, uint8_t seg, bool state)
+void MAX72XX::setLed(uint8_t device, uint8_t dig, uint8_t seg, bool state)
 {
   uint8_t mask = 0b10000000 >> (seg-1);
   if ((digit[dig] & mask) != state){
@@ -49,7 +49,7 @@ void LED::setLed(uint8_t device, uint8_t dig, uint8_t seg, bool state)
 }
 
 // This function applies a mask to the byte/digit controlling the lower and upper part of each led bar and set a value on it leaving the ones for other bars alone
-void LED::show_in_bar(uint8_t device, uint8_t bar,uint8_t value)
+void MAX72XX::show_in_bar(uint8_t device, uint8_t bar,uint8_t value)
 { 
   if ((value >= 0) && (value <= 10))
   {

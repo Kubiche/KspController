@@ -2,8 +2,10 @@
 #include "Debug.h"
 
 
-MCP23017 io1(IO1_I2C_ADDRESS, IO1_INT_PIN);
-MCP23017 io2(IO2_I2C_ADDRESS, IO2_INT_PIN);
+MCP23017 io1;
+MCP23017 io2;
+
+MCP300X adc;
 
 unsigned long analog_last_read = 0; // variable to store the time of the last analog value read.
 
@@ -22,7 +24,7 @@ void updateAnalogs()   //read analog values and update accordingly.
     unsigned int channel[8];
     for (uint8_t i = 0; i < 7; i++)
     {
-      channel[i] = readADC(i); //Read all channels of the ADC IC and store it in the array
+      channel[i] = adc.read(i); //Read all channels of the ADC IC and store it in the array
       debug("channel");
       debug(i);
       debug(": ");

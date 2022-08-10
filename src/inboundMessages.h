@@ -3,7 +3,7 @@
 #include <KerbalSimpit.h>
 #include "MAX72XX.h"
 
-extern LED led;
+extern MAX72XX led;
 #define Bar_Device 0
 
 void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize); // Message handler required by simpit
