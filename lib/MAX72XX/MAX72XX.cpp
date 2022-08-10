@@ -4,7 +4,7 @@
 uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit values to be used by the leds
 
 
- void MAX72XX::init(int CS, uint8_t numOfDevices)
+ MAX72XX::MAX72XX(int CS, uint8_t numOfDevices)
 {
   _LED_CS = CS;
   _numOfDevices = numOfDevices;
@@ -12,7 +12,7 @@ uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit va
     //Led driver MAX7219
   pinMode(_LED_CS, OUTPUT); // Set the CS pin as output
   digitalWrite(_LED_CS, HIGH); // Set CS pin to High
-  for (uint8_t i=0; i<= _numOfDevices; i++)
+  for (uint8_t i=0; i < _numOfDevices; i++)
   {    
     setLedReg(i, OP_SHUTDOWN, 1); // Turn LED controller on
     setLedReg(i, OP_SCANLIMIT, 7); // set to scan all digits

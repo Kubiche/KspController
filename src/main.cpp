@@ -14,7 +14,7 @@ extern MCP23017 io2;
 extern MCP300X adc;
 
 KerbalSimpit mySimpit(Serial);
-MAX72XX led;
+MAX72XX led(LED_CS, 2);
 
 extern Joystick_ Joystick;
 
@@ -24,16 +24,13 @@ void setup()
   SPI.begin(); // set up SPI bus
 
   // Initiate and set the joystick to manual update to prevent USB overflow
-	Joystick.begin(false);  
-
-   
-   adc.init(9);
+	Joystick.begin(false);   
 
   // MCP23017 IO expanders  
-  io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
-  io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
+  //io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
+  //io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
 
-  led.init(LED_CS, 2);
+  //led.init(LED_CS, 2);
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
