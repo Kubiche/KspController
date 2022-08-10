@@ -11,10 +11,10 @@
 extern MCP23017 io1;
 extern MCP23017 io2;
 
-KerbalSimpit mySimpit(Serial);
-MAX72XX led;
 extern MCP300X adc;
 
+KerbalSimpit mySimpit(Serial);
+MAX72XX led;
 
 extern Joystick_ Joystick;
 
