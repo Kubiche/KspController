@@ -2,6 +2,7 @@
 
 // The SPI Slave Select pin for the led controller
 #define LED_CS 10
+#define Bar_Device 0
 
 
 #define ANALOG_CHECK_INTERVAL 5 // Analog read interval to prevent USB saturation.

@@ -18,6 +18,7 @@ uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit va
     setLedReg(i, OP_SCANLIMIT, 7); // set to scan all digits
     setLedReg(i, OP_INTENSITY, 2); // Set intensity to 2 of 16
     setLedReg(i, OP_DISPLAYTEST, 1);
+    delay(500);    
     setLedReg(i, OP_DISPLAYTEST, 0);
   }  
 }
