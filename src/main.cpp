@@ -13,7 +13,7 @@ extern MCP23017 io2;
 
 KerbalSimpit mySimpit(Serial);
 MAX72XX led;
-MCP300X adc;
+extern MCP300X adc;
 
 
 extern Joystick_ Joystick;
