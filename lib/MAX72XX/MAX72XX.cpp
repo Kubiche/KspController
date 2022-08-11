@@ -15,7 +15,7 @@ uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit va
     setLedReg(i, OP_SHUTDOWN, 1); // Turn LED controller on
     setLedReg(i, OP_SCANLIMIT, 7); // set to scan all digits
     setLedReg(i, OP_INTENSITY, 2); // Set intensity to 2 of 16
-    setLedReg(i, OP_DISPLAYTEST, 1);        
+    setLedReg(i, OP_DISPLAYTEST, 0);        
     //setLedReg(i, OP_DISPLAYTEST, 0);
   }  
 }
@@ -24,7 +24,7 @@ void MAX72XX::setLedReg(uint8_t device, uint16_t opcode, uint16_t val)
 {
   uint16_t led_buffer[_numOfDevices] = {};
   led_buffer[device] = opcode;
-  led_buffer[device] <<= 8;
+  led_buffer[device] = (led_buffer[device] << 8);
   led_buffer[device] |= val;   
   SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   digitalWrite(_LED_CS, LOW);
