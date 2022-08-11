@@ -2,11 +2,11 @@
 #include <Wire.h>
 #include "Debug.h"
 
-MCP23017::MCP23017(uint8_t I2CAddress, uint8_t intPin)
+void MCP23017::init(uint8_t I2CAddress, uint8_t intPin)
 {
     _deviceAddress = I2CAddress;
     _intPin = intPin;
-    pinMode(_intPin, INPUT_PULLUP);
+    pinMode(_intPin, INPUT_PULLUP);    
     Wire.beginTransmission(_deviceAddress);
     Wire.write(MCP23017_IOCON);
     Wire.write(0b01111100);

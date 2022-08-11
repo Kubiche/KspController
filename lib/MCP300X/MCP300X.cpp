@@ -2,7 +2,7 @@
 #include <spi.h>
 
 
-MCP300X::MCP300X(uint8_t CS)
+void MCP300X::init(uint8_t CS)
 { 
  _CS = CS;  
  pinMode(_CS, OUTPUT);

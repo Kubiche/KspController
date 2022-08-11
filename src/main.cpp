@@ -14,27 +14,32 @@ extern MCP23017 io2;
 extern MCP300X adc;
 
 KerbalSimpit mySimpit(Serial);
-MAX72XX led(LED_CS, 2);
+MAX72XX led;
 
 extern Joystick_ Joystick;
 
 void setup() 
 {  
-  Wire.begin(); // set up I2c bus
-  SPI.begin(); // set up SPI bus
+   Serial.begin(115200);
+   // set up I2c bus
+   Wire.begin();
+   // set up SPI bus
+   SPI.begin();
 
   // Initiate and set the joystick to manual update to prevent USB overflow
 	Joystick.begin(false);   
+  
+  delay(5000);
 
   // MCP23017 IO expanders  
-  //io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
-  //io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
-
-  //led.init(LED_CS, 2);
+  io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
+  io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
+  adc.init(9);
+  led.init(LED_CS, 2);
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
-  Serial.begin(115200); // Initialize Serial connection to mod  
+  //Serial.begin(115200); // Initialize Serial connection to mod  
   pinMode(BOOT_MODE_PIN, INPUT_PULLUP);
   delay(1000);
   if (digitalRead(BOOT_MODE_PIN))
@@ -61,7 +66,7 @@ void setup()
 
 void loop() 
 {   
-  mySimpit.update(); // Update messages from simpit mod, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
+  //mySimpit.update(); // Update messages from simpit mod, as part of it the function messageHandler gets called to process the mod's output in our code (see inboundMessages.h)
   updateAnalogs();
   updateDigitals();
   Joystick.sendState(); //Send joystick updated states to the PC      

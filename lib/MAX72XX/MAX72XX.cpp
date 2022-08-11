@@ -4,35 +4,36 @@
 uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit values to be used by the leds
 
 
- MAX72XX::MAX72XX(int CS, uint8_t numOfDevices)
+ void MAX72XX::init(int CS, uint8_t numOfDevices)
 {
   _LED_CS = CS;
-  _numOfDevices = numOfDevices;
-  
-    //Led driver MAX7219
+  _numOfDevices = numOfDevices;  
   pinMode(_LED_CS, OUTPUT); // Set the CS pin as output
-  digitalWrite(_LED_CS, HIGH); // Set CS pin to High
-  for (uint8_t i=0; i < _numOfDevices; i++)
+  digitalWrite(_LED_CS, HIGH); // Set CS pin to High  
+  for (uint8_t i = 0; i < _numOfDevices; i++)
   {    
     setLedReg(i, OP_SHUTDOWN, 1); // Turn LED controller on
     setLedReg(i, OP_SCANLIMIT, 7); // set to scan all digits
     setLedReg(i, OP_INTENSITY, 2); // Set intensity to 2 of 16
-    setLedReg(i, OP_DISPLAYTEST, 1);
-    delay(500);    
-    setLedReg(i, OP_DISPLAYTEST, 0);
+    setLedReg(i, OP_DISPLAYTEST, 1);        
+    //setLedReg(i, OP_DISPLAYTEST, 0);
   }  
 }
 
-void MAX72XX::setLedReg(uint8_t device, uint8_t opcode, uint8_t val) 
+void MAX72XX::setLedReg(uint8_t device, uint16_t opcode, uint16_t val) 
 {
   uint16_t led_buffer[_numOfDevices] = {};
   led_buffer[device] = opcode;
   led_buffer[device] <<= 8;
-  led_buffer[device] |= val; 
+  led_buffer[device] |= val;   
   SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   digitalWrite(_LED_CS, LOW);
-  for (uint8_t i = 0; i <= _numOfDevices; i++)
+  for (int i = (_numOfDevices - 1); i >= 0; i--)
   {
+    debug("device ");
+    debug(i);
+    debug(": ");
+    debuglnB(led_buffer[i]);
     SPI.transfer16(led_buffer[i]);  
   }
   digitalWrite(_LED_CS, HIGH);

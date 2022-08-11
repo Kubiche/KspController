@@ -22,10 +22,10 @@
 class MAX72XX
 {
 public:
-    MAX72XX(int CS, uint8_t numOfDevices);
+    void init(int CS, uint8_t numOfDevices);
 
     //functions to control led rows at a time
-    void setLedReg(uint8_t device, uint8_t opcode, uint8_t val);
+    void setLedReg(uint8_t device, uint16_t opcode, uint16_t val);
 
     //Funtion for individual led toggling
     void setLed(uint8_t device, uint8_t dig, uint8_t seg, bool state);
