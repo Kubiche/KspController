@@ -2,7 +2,7 @@
 #include <Wire.h>
 #include "Debug.h"
 
-void MCP23017::init(uint8_t I2CAddress, uint8_t intPin)
+void MCP23017::begin(uint8_t I2CAddress, uint8_t intPin)
 {
     _deviceAddress = I2CAddress;
     _intPin = intPin;

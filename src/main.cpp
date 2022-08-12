@@ -20,22 +20,30 @@ extern Joystick_ Joystick;
 
 void setup() 
 {  
-   Serial.begin(115200);
+   Serial.begin(115200); 
+  
+
+  debugln("MAIN WAIT");
+
    // set up I2c bus
    Wire.begin();
    // set up SPI bus
    SPI.begin();
 
   // Initiate and set the joystick to manual update to prevent USB overflow
-	Joystick.begin(false);   
-  
-  delay(5000);
+	Joystick.begin(false);  
 
   // MCP23017 IO expanders  
-  io1.init(IO1_I2C_ADDRESS, IO1_INT_PIN);
-  io2.init(IO2_I2C_ADDRESS, IO2_INT_PIN);
-  adc.init(9);
-  led.init(LED_CS, 2);
+  io1.begin(IO1_I2C_ADDRESS, IO1_INT_PIN);
+  io2.begin(IO2_I2C_ADDRESS, IO2_INT_PIN);
+  adc.begin(9);
+  led.begin(LED_CS, 2);
+
+  for (int i = 1; i < 9; i++)
+  {
+    led.setLedReg(1, i, 255);
+    led.setLedReg(0, i, 255);
+  }
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
