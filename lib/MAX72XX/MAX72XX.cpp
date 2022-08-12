@@ -1,9 +1,6 @@
 #include "MAX72XX.h"
 #include "Debug.h"
 
-uint8_t digit[8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit values to be used by the leds
-
-
  void MAX72XX::begin(int LED_CS, uint8_t numOfDevices)
 {
   _LED_CS = LED_CS;
@@ -35,7 +32,7 @@ void MAX72XX::setLedReg(uint8_t device, uint16_t opcode, uint16_t val)
   digitalWrite(_LED_CS, LOW);
   for (uint8_t i = 0; i < _numOfDevices; i++)
   {
-      SPI.transfer16(led_buffer[i]);
+    SPI.transfer16(led_buffer[i]);
   }
   digitalWrite(_LED_CS, HIGH);
   SPI.endTransaction();
@@ -44,10 +41,9 @@ void MAX72XX::setLedReg(uint8_t device, uint16_t opcode, uint16_t val)
 void MAX72XX::setLed(uint8_t device, uint8_t dig, uint8_t seg, bool state)
 {
   uint8_t mask = 0b10000000 >> (seg-1);
-  if ((digit[dig] & mask) != state){
-    digit[dig] ^= mask; 
-    setLedReg(device, (dig + 1), digit[dig]);
-    
+  if ((digit[device][dig] & mask) != state){
+    digit[device][dig] ^= mask; 
+    setLedReg(device, (dig + 1), digit[device][dig]);    
   }
 }
 
@@ -62,12 +58,12 @@ void MAX72XX::show_in_bar(uint8_t device, uint8_t bar,uint8_t value)
     unsigned int barlevel = fullbar[bar] << shifted;  // shift the bits left to show the desired level
     unsigned int levelmask = ~barMask[bar]; // Reverse mask to correct any bits that have been moved to spots where they could interfere with other bars
     barlevel &= levelmask;  // Apply modified mask
-    digit[(bar+1)] &= barMask[bar]; // Apply LSBits of actual mask to the top byte of the bar 
-    digit[(bar+1)] |= barlevel;     // Apply the LSBits of the value to the top byte of bar
-    setLedReg(0, (bar+2), digit[(bar+1)]); // Send the new value of the top byte of the bar to the proper digit
-    digit[bar] &= barMask[bar] >> 8;      // Apply MSBits of mask to the bottom byte of the bar
-    digit[bar] |= barlevel >> 8;          // Apply the MSBits of the value to the bottom byte of the bar
-    setLedReg(0, (bar+1), digit[bar]);     //  Send the new value of the bottom byte to the propper digit
+    digit[device][(bar+1)] &= barMask[bar]; // Apply LSBits of actual mask to the top byte of the bar 
+    digit[device][(bar+1)] |= barlevel;     // Apply the LSBits of the value to the top byte of bar
+    setLedReg(0, (bar+2), digit[device][(bar+1)]); // Send the new value of the top byte of the bar to the proper digit
+    digit[device][bar] &= barMask[bar] >> 8;      // Apply MSBits of mask to the bottom byte of the bar
+    digit[device][bar] |= barlevel >> 8;          // Apply the MSBits of the value to the bottom byte of the bar
+    setLedReg(0, (bar+1), digit[device][bar]);     //  Send the new value of the bottom byte to the propper digit
   }
 }     
     

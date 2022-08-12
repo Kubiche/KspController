@@ -35,6 +35,7 @@ public:
   
 private:
     int _LED_CS;
-    uint8_t _numOfDevices;
+    uint8_t _numOfDevices = 1;
+    uint8_t digit[8][8] {0, 0, 0, 0, 0, 0, 0, 0}; //array to store the max7219 digit values to be used by the leds
 };      
  
