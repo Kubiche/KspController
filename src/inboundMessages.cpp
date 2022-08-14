@@ -84,11 +84,11 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
     case ACTIONSTATUS_MESSAGE:  ////Vessel total Solid fuel
       if (msg[0] & SAS_ACTION)
       {
-        led.setLed(Controller_v3, 7, 1, true);      
+        led.setLed(Controller_v3, 0, 2, true);      
       }
       else
       {
-        led.setLed(Controller_v3, 7,1,false);
+        led.setLed(Controller_v3, 0,2,false);
       } 
     break;
   }
