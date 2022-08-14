@@ -12,7 +12,7 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         // Convert the message we received to an Resource struct.
         mySStageFuel = parseResource(msg);
         if (mySStageFuel.available == 0){
-          led.show_in_bar(Controller_v2, 3, 0);
+          led.show_in_bar(Controller_v2, 1, 0);
         }
         else {
           led.show_in_bar(Controller_v2, 3, map(mySStageFuel.available, 0, mySStageFuel.total, 1, 10));
@@ -36,7 +36,7 @@ void messageHandler(uint8_t messageType, uint8_t msg[], uint8_t msgSize) {
         resourceMessage myMonoFuel;
         myMonoFuel = parseResource(msg);
         if (myMonoFuel.available == 0){
-          led.show_in_bar(Controller_v2, 1, 0);
+          led.show_in_bar(Controller_v2, 3, 0);
         }
         else {
           led.show_in_bar(Controller_v2, 1, map(myMonoFuel.available, 0, myMonoFuel.total, 1, 10));
