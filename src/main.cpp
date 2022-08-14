@@ -39,17 +39,18 @@ void setup()
   adc.begin(9);
   led.begin(LED_CS, 2);
 
+  /*
   for (int i = 1; i < 9; i++)
   {
-    led.setLedReg(1, i, 255);
-    led.setLedReg(0, i, 255);
+    led.setLedReg(1, i, 0);
+    led.setLedReg(0, i, 0);
   }
+  */
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
   //Serial.begin(115200); // Initialize Serial connection to mod  
-  pinMode(BOOT_MODE_PIN, INPUT_PULLUP);
-  delay(1000);
+  pinMode(BOOT_MODE_PIN, INPUT_PULLUP);  
   if (digitalRead(BOOT_MODE_PIN))
   {
     while (!mySimpit.init()) 

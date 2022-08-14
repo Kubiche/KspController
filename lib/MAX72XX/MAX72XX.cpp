@@ -12,8 +12,9 @@
     setLedReg(i, OP_SHUTDOWN, 1); // Turn LED controller on
     setLedReg(i, OP_SCANLIMIT, 7); // set to scan all digits
     setLedReg(i, OP_INTENSITY, 2); // Set intensity to 2 of 16
-    //setLedReg(i, OP_DISPLAYTEST, 1);    
-    //setLedReg(i, OP_DISPLAYTEST, 0);
+    setLedReg(i, OP_DISPLAYTEST, 1);
+    delay(1000);    
+    setLedReg(i, OP_DISPLAYTEST, 0);
   }  
 }
 
@@ -28,13 +29,13 @@ void MAX72XX::setLedReg(uint8_t device, uint16_t opcode, uint16_t val)
   debuglnB(led_buffer[1]);
   debug("Device 0: ");
   debuglnB(led_buffer[0]);
-  debugln("sent");
-  digitalWrite(_LED_CS, LOW);
+  debugln("sent");  
   for (uint8_t i = 0; i < _numOfDevices; i++)
   {
+    digitalWrite(_LED_CS, LOW);
     SPI.transfer16(led_buffer[i]);
-  }
-  digitalWrite(_LED_CS, HIGH);
+    digitalWrite(_LED_CS, HIGH);
+  }  
   SPI.endTransaction();
 }
 
