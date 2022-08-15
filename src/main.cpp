@@ -39,13 +39,13 @@ void setup()
   adc.begin(9);
   led.begin(LED_CS, 2);
 
-  
+  /*
   for (int i = 1; i < 9; i++)
   {
     led.setLedReg(1, i, 0);
     led.setLedReg(0, i, 0);
   }
-  
+  */
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
