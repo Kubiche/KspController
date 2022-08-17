@@ -37,7 +37,7 @@ void setup()
   io1.begin(IO1_I2C_ADDRESS, IO1_INT_PIN);
   io2.begin(IO2_I2C_ADDRESS, IO2_INT_PIN);
   adc.begin(9);
-  led.begin(LED_CS, 2);
+  led.begin(LED_CS);
 
   /*
   for (int i = 1; i < 9; i++)

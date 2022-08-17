@@ -19,10 +19,14 @@
 #define OP_DISPLAYTEST 0x0F
 
 
+//the number of cascaded MAX72XX devices.
+#define LED_Devices 2
+
+
 class MAX72XX
 {
 public:
-    void begin(int CS, uint8_t numOfDevices);
+    void begin(int CS);
 
     //functions to control led rows at a time
     void setLedReg(uint8_t device, uint16_t opcode, uint16_t val);
@@ -35,7 +39,7 @@ public:
   
 private:
     int _LED_CS;
-    uint8_t _numOfDevices = 1;
-    uint8_t digit[8][8] = {0}; //array to store the max72xx digit values to be used by the leds per device
+    uint8_t _numOfDevices;
+    uint8_t digit[LED_Devices][8] = {0}; //array to store the max72xx digit values to be used by the leds per device
 };      
  
