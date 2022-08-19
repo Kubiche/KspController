@@ -39,13 +39,19 @@ void setup()
   adc.begin(9);
   led.begin(LED_CS);
 
-  /*
+  
   for (int i = 1; i < 9; i++)
   {
     led.setLedReg(1, i, 0);
     led.setLedReg(0, i, 0);
   }
-  */
+
+  for (int i = 1; i < 7; i++)
+  {
+   led.show_in_bar(1, i, 8);
+   delay(1000);      
+  }
+  
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
