@@ -46,10 +46,13 @@ void setup()
     led.setLedReg(0, i, 0);
   }
 
+  for (int lev = 10; lev >= 0; lev--)
+  {
   for (int i = 1; i < 7; i++)
   {
-   led.show_in_bar(1, i, 8);
+   led.show_in_bar(1, i, lev);
    delay(1000);      
+  }
   }
   
 
