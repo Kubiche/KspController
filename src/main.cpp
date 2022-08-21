@@ -39,7 +39,7 @@ void setup()
   adc.begin(9);
   led.begin(LED_CS);
 
-  
+  /*
   for (int i = 1; i < 9; i++)
   {
     led.setLedReg(1, i, 0);
@@ -54,11 +54,12 @@ void setup()
    delay(1000);      
   }
   }
+  */
   
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
-  //Serial.begin(115200); // Initialize Serial connection to mod  
+  Serial.begin(115200); // Initialize Serial connection to mod  
   pinMode(BOOT_MODE_PIN, INPUT_PULLUP);  
   if (digitalRead(BOOT_MODE_PIN))
   {
