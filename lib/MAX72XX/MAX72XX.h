@@ -26,16 +26,16 @@
 class MAX72XX
 {
 public:
-    void begin(int cs);
+    void Begin(int cs);
 
     //functions to control led rows at a time
-    void setLedReg(uint8_t device, uint16_t opcode, uint16_t val);
+    void SetLedReg(uint8_t device, uint16_t opcode, uint16_t val);
 
     //Funtion for individual led toggling
-    void setLed(uint8_t device, uint8_t dig, uint8_t seg, bool state);
+    void SetLed(uint8_t device, uint8_t dig, uint8_t seg, bool state);
 
     // functions to diplay mapped values into 10 segment led bars
-    void show_in_bar(uint8_t device, uint8_t bar, uint8_t value);
+    void Show_in_bar(uint8_t device, uint8_t bar, uint8_t value);
   
 private:
     int led_cs_;

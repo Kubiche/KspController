@@ -25,7 +25,7 @@ void updateAnalogs()   //read analog values and update accordingly.
     unsigned int channel[8];
     for (uint8_t i = 0; i < 7; i++)
     {
-      channel[i] = adc.read(i); //Read all channels of the ADC IC and store it in the array
+      channel[i] = adc.Read(i); //Read all channels of the ADC IC and store it in the array
       //debug("channel");
       //debug(i);
       //debug(": ");
@@ -46,8 +46,8 @@ void updateDigitals()
 {
   if (!digitalRead(IO1_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
   {
-    unsigned int flags = io1.readIntFlag(); //read the interrupt flags to see which pin/s trigerred the interrupt
-    unsigned int inputs = io1.readGPIOs();  //read the states of the gpio pins
+    unsigned int flags = io1.ReadIntFlag(); //read the interrupt flags to see which pin/s trigerred the interrupt
+    unsigned int inputs = io1.ReadGPIOs();  //read the states of the gpio pins
     debug("Flags : ");
     debuglnB(flags);
     debug("inputs: ");
@@ -71,8 +71,8 @@ void updateDigitals()
 
   if (!digitalRead(IO2_INT_PIN)) //check for interrupt pin from io expander chip to see if any changes in states.
   {
-    unsigned int flags = io2.readIntFlag(); //read the interrupt flags to see which pin/s trigerred the interrupt
-    unsigned int inputs = io2.readGPIOs();  //read the states of the gpio pins
+    unsigned int flags = io2.ReadIntFlag(); //read the interrupt flags to see which pin/s trigerred the interrupt
+    unsigned int inputs = io2.ReadGPIOs();  //read the states of the gpio pins
     debug("Flags : ");
     debuglnB(flags);
     debug("inputs: ");

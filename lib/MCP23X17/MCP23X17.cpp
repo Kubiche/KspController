@@ -2,7 +2,7 @@
 #include <Wire.h>
 #include "Debug.h"
 
-void MCP23017::begin(uint8_t I2C_address, uint8_t interrupt_pin)
+void MCP23017::Begin(uint8_t I2C_address, uint8_t interrupt_pin)
 {
     device_address_ = I2C_address;
     interrupt_pin_ = interrupt_pin;
@@ -53,7 +53,7 @@ void MCP23017::begin(uint8_t I2C_address, uint8_t interrupt_pin)
     Wire.endTransmission();
 }
 
-unsigned int MCP23017::readGPIOs() //reads the state of the gpio pins
+unsigned int MCP23017::ReadGPIOs() //reads the state of the gpio pins
 { 
   unsigned int gpio = 0;
   Wire.beginTransmission(device_address_);
@@ -70,7 +70,7 @@ unsigned int MCP23017::readGPIOs() //reads the state of the gpio pins
   return gpio;
 }
 
-unsigned int MCP23017::readIntFlag() //reads teh interrup flag for the gpios
+unsigned int MCP23017::ReadIntFlag() //reads teh interrup flag for the gpios
 {
   Wire.beginTransmission(device_address_);
   Wire.write(MCP23017_INTFB);

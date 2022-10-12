@@ -34,10 +34,10 @@ void setup()
 	Joystick.begin(false);  
 
   // MCP23017 IO expanders  
-  io1.begin(IO1_I2C_ADDRESS, IO1_INT_PIN);
-  io2.begin(IO2_I2C_ADDRESS, IO2_INT_PIN);
-  adc.begin(9);
-  led.begin(LED_CS);
+  io1.Begin(IO1_I2C_ADDRESS, IO1_INT_PIN);
+  io2.Begin(IO2_I2C_ADDRESS, IO2_INT_PIN);
+  adc.Begin(9);
+  led.Begin(LED_CS);
 
   /*
   for (int i = 1; i < 9; i++)

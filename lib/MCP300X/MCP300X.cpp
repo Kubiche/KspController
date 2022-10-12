@@ -2,7 +2,7 @@
 #include <spi.h>
 
 
-void MCP300X::begin(uint8_t cs)
+void MCP300X::Begin(uint8_t cs)
 { 
  adc_cs_ = cs;  
  pinMode(adc_cs_, OUTPUT);
@@ -10,7 +10,7 @@ void MCP300X::begin(uint8_t cs)
 }
 
 
-unsigned int MCP300X::read(uint8_t channel)
+unsigned int MCP300X::Read(uint8_t channel)
 {
   uint8_t buffer[3]; //stores data temporarily to transmit to IC ans stores received readings to return
   buffer[0] = 0b00000001; //this is the start bit as per datasheet section 6.1
