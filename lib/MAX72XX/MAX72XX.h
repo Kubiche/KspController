@@ -38,13 +38,8 @@ public:
     void show_in_bar(uint8_t device, uint8_t bar, uint8_t value);
   
 private:
-<<<<<<< HEAD
     int led_cs_;
     uint8_t number_of_devices_;
     uint8_t digit_[LED_Devices][8] = {0}; //array to store the max72xx digit values to be used by the leds per device
-=======
-    int _LED_CS;    
-    uint8_t digit[LED_Devices][8] = {0}; //array to store the max72xx digit values to be used by the leds per device
->>>>>>> 2321d89d32ef52721de25f2b02fdf0aca1bc410e
 };      
  
