@@ -45,11 +45,21 @@ void setup()
     led.setLedReg(1, i, 0);
     led.setLedReg(0, i, 0);
   }
+
+  for (int lev = 10; lev >= 0; lev--)
+  {
+  for (int i = 1; i < 7; i++)
+  {
+   led.show_in_bar(1, i, lev);
+   delay(1000);      
+  }
+  }
   */
+  
 
   //------------------------------------------------------Write any test code above here since the while below will halt code---------------------------------------------------------------------------------------------
     
-  //Serial.begin(115200); // Initialize Serial connection to mod  
+  Serial.begin(115200); // Initialize Serial connection to mod  
   pinMode(BOOT_MODE_PIN, INPUT_PULLUP);  
   if (digitalRead(BOOT_MODE_PIN))
   {
