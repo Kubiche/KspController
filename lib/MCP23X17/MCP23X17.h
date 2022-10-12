@@ -30,10 +30,10 @@
 class MCP23017 
 {
 public:
-    void begin(uint8_t I2CAddress, uint8_t intPin); //class constructor
+    void begin(uint8_t I2C_address, uint8_t interrupt_pin); //class constructor
     unsigned int readGPIOs(); // Reads gpio registers from IC and stores them in the array bellow.
     unsigned int readIntFlag();    
 private:
-    int _deviceAddress;
-    int _intPin;    
+    int device_address_;
+    int interrupt_pin_;    
 };

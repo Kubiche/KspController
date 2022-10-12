@@ -26,7 +26,7 @@
 class MAX72XX
 {
 public:
-    void begin(int CS);
+    void begin(int cs);
 
     //functions to control led rows at a time
     void setLedReg(uint8_t device, uint16_t opcode, uint16_t val);
@@ -38,8 +38,8 @@ public:
     void show_in_bar(uint8_t device, uint8_t bar, uint8_t value);
   
 private:
-    int _LED_CS;
-    uint8_t _numOfDevices;
-    uint8_t digit[LED_Devices][8] = {0}; //array to store the max72xx digit values to be used by the leds per device
+    int led_cs_;
+    uint8_t number_of_devices_;
+    uint8_t digit_[LED_Devices][8] = {0}; //array to store the max72xx digit values to be used by the leds per device
 };      
  
