@@ -56,7 +56,7 @@ void MAX72XX::Show_in_bar(uint8_t device, uint8_t bar,uint8_t value)
   // Bars indexed from left to right from 1 to 6 
   if ((value >= 0) && (value <= 10))
   {
-    const uint16_t fullbar[6] {0b1111111111000000, 0b0011111111110000, 0b0000111111111100, 0b0000001111111111, 0b1111111111000000, 0b0011111111110000};// Array to store the full bar value to manipulate for the actual value  
+    const uint16_t Kfullbar[6] {0b1111111111000000, 0b0011111111110000, 0b0000111111111100, 0b0000001111111111, 0b1111111111000000, 0b0011111111110000};// Array to store the full bar value to manipulate for the actual value  
     uint8_t bar_top_byte;
     uint8_t bar_bottom_byte;
     uint8_t top_digit_opcode;
@@ -77,12 +77,12 @@ void MAX72XX::Show_in_bar(uint8_t device, uint8_t bar,uint8_t value)
       bottom_digit_opcode = bar + 1;
     }    
     uint8_t shifted = (10 - value); // fugure out the amount of bits to shift
-    uint16_t barlevel = fullbar[index] << shifted;  // shift the bits left to show the desired level. Bar 1 index 0 of array.    
-    barlevel &= fullbar[index];  // Apply modified mask
-    digit_[device][bar_top_byte] &= ~fullbar[index]; // Apply LSBits of actual mask to the top byte of the bar 
+    uint16_t barlevel = Kfullbar[index] << shifted;  // shift the bits left to show the desired level. Bar 1 index 0 of array.    
+    barlevel &= Kfullbar[index];  // Apply modified mask
+    digit_[device][bar_top_byte] &= ~Kfullbar[index]; // Apply LSBits of actual mask to the top byte of the bar 
     digit_[device][bar_top_byte] |= barlevel;     // Apply the LSBits of the value to the top byte of bar
     SetLedReg(device, top_digit_opcode, digit_[device][bar_top_byte]); // Send the new value of the top byte of the bar to the proper digit
-    digit_[device][bar_bottom_byte] &= ~fullbar[index] >> 8;      // Apply MSBits of mask to the bottom byte of the bar
+    digit_[device][bar_bottom_byte] &= ~Kfullbar[index] >> 8;      // Apply MSBits of mask to the bottom byte of the bar
     digit_[device][bar_bottom_byte] |= barlevel >> 8;          // Apply the MSBits of the value to the bottom byte of the bar
     SetLedReg(device, bottom_digit_opcode, digit_[device][bar_bottom_byte]);     //  Send the new value of the bottom byte to the propper digit
   }
