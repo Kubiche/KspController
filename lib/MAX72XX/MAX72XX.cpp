@@ -57,12 +57,19 @@ void MAX72XX::Show_in_bar(uint8_t device, uint8_t bar,uint8_t value)
   if ((value >= 0) && (value <= 10))
   {
     const uint16_t Kfullbar[6] {0b1111111111000000, 0b0011111111110000, 0b0000111111111100, 0b0000001111111111, 0b1111111111000000, 0b0011111111110000};// Array to store the full bar value to manipulate for the actual value  
-    uint8_t bar_top_byte = bar;
-    uint8_t bar_bottom_byte = (bar - 1);
-    uint8_t top_digit_opcode = (bar + 1);
-    uint8_t bottom_digit_opcode = bar;
-    uint8_t index = bar - 1;    
-    if (bar > 5)
+    uint8_t bar_top_byte;
+    uint8_t bar_bottom_byte;
+    uint8_t top_digit_opcode;
+    uint8_t bottom_digit_opcode;
+    uint8_t index = bar - 1;
+    if ( bar < 5)
+    {
+      bar_top_byte = bar;
+      bar_bottom_byte = bar - 1;
+      top_digit_opcode = bar + 1;
+      bottom_digit_opcode = bar;
+    }
+    else
     {
       bar_top_byte = bar + 1;
       bar_bottom_byte = bar;
